@@ -57,7 +57,7 @@ Use it:
 
 Click on the image for a short screencast.
 
-[![Screencast of vCoolor](.img/play-me.jpg)](https://youtube.com)
+[![Screencast of vCoolor](.img/play-me.jpg)](https://www.youtube.com/watch?v=ZBJ_-Uxm55U)
 
 ### Commands
 
