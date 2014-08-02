@@ -7,15 +7,13 @@
 " License      : This file is placed in the public domain.
 
 
-if exists("g:vcoolor")
+if exists("g:loadedVCoolor")
     finish
 endif
-let g:vcoolor = 1
+let g:loadedVCoolor = 1
 
 " To avoid conflict problems.
-let s:saveFileFormat = &fileformat
 let s:saveCpoptions = &cpoptions
-set fileformat=unix
 set cpoptions&vim
 
 " COMMANDS
@@ -352,6 +350,4 @@ function s:VCoolor()
 endfunction
 
 let &cpoptions = s:saveCpoptions
-let &fileformat = s:saveFileFormat
 unlet s:saveCpoptions
-unlet s:saveFileFormat
