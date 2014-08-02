@@ -74,8 +74,8 @@ Mapping
 
 To change the mapping by default, add to your *vimrc*.
 
-	nmap <NEW_MAPPING> <Plug>vCooler	" NORMAL mode
-	imap <NEW_MAPPING> <Plug>vCoolerI	" INSERT mode
+	nmap <NEW_MAPPING> <Plug>vCoolor	" NORMAL mode
+	imap <NEW_MAPPING> <Plug>vCoolorI	" INSERT mode
 
 You can use the same mapping for both modes.
 
