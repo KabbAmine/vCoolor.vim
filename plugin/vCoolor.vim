@@ -1,8 +1,8 @@
 " Simple color selector/picker plugin.
-" Version: 0.1
+" Version: 0.2
 
 " Creation     : 2014-07-26
-" Modification : 2014-08-02
+" Modification : 2014-08-04
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -25,7 +25,7 @@ if exists(":GetColor") != 2
 endif
 
 " Conversion commands.
-let s:commandNames = ["Rgb2Hex", "Hex2Rgb", "Hex2Lit"]
+let s:commandNames = ["Rgb2Hex", "Rgb2RgbPerc", "RgbPerc2Hex", "RgbPerc2Rgb", "Hex2Lit", "Hex2Rgb", "Hex2RgbPerc"]
 for cn in s:commandNames
     if exists(":".cn."") != 2
         execute "command! -nargs=1 ".cn." :echo s:".cn."(<args>)"
@@ -211,14 +211,16 @@ function s:GetCurrCol()
     " [
     " currentColorName,
     " currentHexColor,
-    " typeColor (l: literal, n:none, h:hex, r:rgb)
+    " typeColor (l: literal, n:none, h:hex, r:rgb, rp:rgb(%))
     " ]
 
     let l:cWord = expand("<cWORD>")
     let l:cword = expand("<cword>")
     let l:getLine = getline(".")
+
     let l:regexHex = '^.*\(#[a-fA-F0-9]\{3,6}\).*$'
     let l:regexRgb = '^.*\<rgb\>(\(\([ ]*[0-9]\{1,3}[ ]*,\)\{2}[ ]*[0-9]\{1,3}[ ]*\)).*$'
+    let l:regexRgbPerc = '^.*\<rgb\>(\(\([ ]*[0-9]\{1,3}%[ ]*,\)\{2}[ ]*[0-9]\{1,3}%[ ]*\)).*$'
 
     let s:currColor = ["","",""]
     if has_key(s:colorNames, tolower(l:cword))
@@ -227,6 +229,10 @@ function s:GetCurrCol()
         let s:currColor[0] = substitute(l:getLine, l:regexRgb, '\1', '')
         let s:currColor[1] = s:Rgb2Hex(s:currColor[0])
         let s:currColor[2] = "r"
+    elseif match(l:getLine, l:regexRgbPerc) != -1
+        let s:currColor[0] = substitute(l:getLine, l:regexRgbPerc, '\1', '')
+        let s:currColor[1] = s:RgbPerc2Hex(s:currColor[0])
+        let s:currColor[2] = "rp"
     elseif match(l:cWord, l:regexHex) != -1
         let s:currColor[0] = substitute(l:cWord, l:regexHex, '\1', '')
         let s:currColor[1] = s:currColor[0]
@@ -249,6 +255,9 @@ function s:SetColorByType(oldColor, newCol)
 
     if a:oldColor[2] == 'r'
         let l:newCol = s:Hex2Rgb(l:newCol)
+        execute "silent: s/".l:oldCol."/".l:newCol
+    elseif a:oldColor[2] == 'rp'
+        let l:newCol = s:Hex2RgbPerc(l:newCol)
         execute "silent: s/".l:oldCol."/".l:newCol
     elseif a:oldColor[2] == 'l'
         let l:newCol = s:Hex2Lit(l:newCol)
@@ -293,6 +302,74 @@ function s:Rgb2Hex(rgbCol)
     return "#".l:color
 
 endfunction
+function s:Rgb2RgbPerc(rgbCol)
+    " Convert from rgb to rgb (%):
+    " 255, 0, 255 => 100%, 0%, 100%
+
+    let l:rgbCol = substitute(a:rgbCol, " ", "", "g")
+    let l:rgbColL = split(l:rgbCol, ",")
+
+    let l:color = ""
+    for l:element in copy(l:rgbColL)
+        let l:rgbElem= (l:element * 100) / 255
+        if len(l:color) == 0
+            let l:color = l:rgbElem."%"
+        else
+            let l:color = l:color.", ".l:rgbElem."%"
+        endif
+    endfor
+
+    return color
+
+endfunction
+function s:RgbPerc2Hex(rgbPercCol)
+    " Convert from rgb (%) to hex:
+    " 100%, 0%, 100% => #FF00FF
+
+    let l:rgbCol = s:RgbPerc2Rgb(a:rgbPercCol)
+    let l:color = s:Rgb2Hex(l:rgbCol)
+
+    return l:color
+
+endfunction
+function s:RgbPerc2Rgb(rgbPercCol)
+    " Convert from rgb (%) to rgb:
+    " 100%, 0%, 0% => 255, 0, 0
+
+    let l:rgbPercCol = substitute(a:rgbPercCol, " ", "", "g")
+    let l:rgbPercCol = substitute(a:rgbPercCol, "%", "", "g")   " Remove %.
+    let l:rgbPercColL = split(l:rgbPercCol, ",")
+
+    let l:color = ""
+    for l:element in copy(l:rgbPercColL)
+        let l:elementF = str2float(l:element)
+        let l:rgbElem = round(l:elementF * 2.55)
+        let l:rgbElem = float2nr(l:rgbElem)
+        if len(l:color) == 0
+            let l:color = l:rgbElem
+        else
+            let l:color = l:color.", ".l:rgbElem
+        endif
+    endfor
+
+    return l:color
+
+endfunction
+function s:Hex2Lit(hexCol)
+    " Convert from hex to literal name.
+    " #FF0000 => red
+
+    let l:colIndex = index(values(s:colorNames), a:hexCol)
+
+    if l:colIndex != -1
+        let s:color =get(keys(s:colorNames), l:colIndex)
+    else
+        let s:color = a:hexCol
+    endif
+
+    return s:color
+
+endfunction
 function s:Hex2Rgb(hexCol)
     " Convert from hex to rgb:
     " #FF00FF => 255, 0, 255
@@ -316,19 +393,14 @@ function s:Hex2Rgb(hexCol)
     return s:color
 
 endfunction
-function s:Hex2Lit(hexCol)
-    " Convert from hex to literal name.
-    " #FF0000 => red
+function s:Hex2RgbPerc(hexCol)
+    " Convert from hex to rgb (%):
+    " #FF00FF => 100%, 0, 100%
 
-    let l:colIndex = index(values(s:colorNames), a:hexCol)
+	let l:rgbCol = s:Hex2Rgb(a:hexCol)
+	let l:color = s:Rgb2RgbPerc(l:rgbCol)
 
-    if l:colIndex != -1
-        let s:color =get(keys(s:colorNames), l:colIndex)
-    else
-        let s:color = a:hexCol
-    endif
-
-    return s:color
+	return l:color
 
 endfunction
 
