@@ -337,7 +337,7 @@ function s:RgbPerc2Rgb(rgbPercCol)
     " 100%, 0%, 0% => 255, 0, 0
 
     let l:rgbPercCol = substitute(a:rgbPercCol, " ", "", "g")
-    let l:rgbPercCol = substitute(a:rgbPercCol, "%", "", "g")   " Remove %.
+    let l:rgbPercCol = substitute(l:rgbPercCol, "%", "", "g")   " Remove %.
     let l:rgbPercColL = split(l:rgbPercCol, ",")
 
     let l:color = ""
@@ -397,10 +397,10 @@ function s:Hex2RgbPerc(hexCol)
     " Convert from hex to rgb (%):
     " #FF00FF => 100%, 0, 100%
 
-	let l:rgbCol = s:Hex2Rgb(a:hexCol)
-	let l:color = s:Rgb2RgbPerc(l:rgbCol)
+    let l:rgbCol = s:Hex2Rgb(a:hexCol)
+    let l:color = s:Rgb2RgbPerc(l:rgbCol)
 
-	return l:color
+    return l:color
 
 endfunction
 
