@@ -9,7 +9,7 @@ vCoolor is a Vim plugin that allows using a GTK+ color selection dialog via [Yad
 What this plugin do:
 
 * Insert or modify a hex color even if there are many colors in 1 line.
-* Modify a rgb color [0-255] & [%] (Only one by line).
+* Modify a rgb color 0-255 values and %(Only one by line).
 
 What this plugin doesn't do:
 
@@ -25,7 +25,7 @@ Installation
 
 To use vCoolor, you need to have:
 
-* [Yad](http://sourceforge.net/projects/yad-dialog/)
+* [Yad](http://sourceforge.net/projects/yad-dialog/) (Compiled with GTK2 to avoid problem [#1](https://github.com/KabbAmine/vCoolor.vim/issues/1))
 * The plugin [ConvertBase.vim](http://www.vim.org/scripts/script.php?script_id=54) *(You can use Vundle for that as described further)*.
 
 ### Manual installation
