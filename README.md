@@ -9,7 +9,7 @@ vCoolor is a Vim plugin that allows using a GTK+ color selection dialog via [Yad
 What this plugin do:
 
 * Insert or modify a hex color even if there are many colors in 1 line.
-* Modify a rgb color (Only one by line).
+* Modify a rgb color [0-255] & [%] (Only one by line).
 
 What this plugin doesn't do:
 
@@ -65,9 +65,15 @@ I've used some color conversion commands for debug purpose but I finally decided
 
 Here they are with exemples to understand how they work:
 
-	:Hex2Lit "#FF00FF"		" Gives "magenta"
-	:Hex2Rgb "#FF00FF"		" Gives "255, 0, 255"
-	:Rgb2Hex "255, 0, 255"	" Gives "#FF00FF"
+	:Rgb2Hex "255, 0, 255"			" Gives "#FF00FF"
+	:Rgb2RgbPerc "255, 0, 255"		" Gives "100%, 0%, 100%"
+	
+    :RgbPerc2Hex "100%, 0%, 100%"	" Gives "#FF00FF"
+	:RgbPerc2Rgb "100%, 0%, 100%"	" Gives "255, 0, 255"
+	
+    :Hex2Lit "#FF00FF"				" Gives "magenta"
+	:Hex2Rgb "#FF00FF"				" Gives "255, 0, 255"
+	:Hex2RgbPerc "#FF00FF"			" Gives "100%, 0%, 100%"
 
 Mapping
 -------
@@ -82,11 +88,12 @@ You can use the same mapping for both modes.
 TODO
 ----
 
-* Windows alternative.
-* A better regex patterns.
-* Handle rgb(%), rgba, hsv, hsva colors.
-* Add possibility to modify 2 or more rgb colors in a line...
-* Add a vim doc file.
+- Windows alternative.
+- A better regex patterns.
+- **+ Handle rgb(%)**
+- Handle rgba, hsv, hsva colors.
+- Add possibility to modify 2 or more rgb colors in a line...
+- Add a vim doc file.
 
 Notes
 -------------
