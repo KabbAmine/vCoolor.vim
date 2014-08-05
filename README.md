@@ -8,13 +8,13 @@ vCoolor is a Vim plugin that allows using a GTK+ color selection dialog via [Yad
 
 What this plugin do:
 
-* Insert or modify a hex color even if there are many colors in 1 line.
-* Modify a rgb color 0-255 values and %(Only one by line).
+* Insert hex or rgb color anywhere.
+* Modify hex color even if there are many colors in 1 line.
+* Modify a rgb color with 0-255 values or % (Only one by line).
 
 What this plugin doesn't do:
 
-* Insert rgb (Can implement it if needed), rgba, hsv, hsva colors.
-* Modify rgba, hsv (Working on it), hsva colors. 
+* Insert or modify rgba, hsl (Working on it) or hsla colors.
 
 ![vCoolor](.img/screen.png)
 
@@ -25,7 +25,7 @@ Installation
 
 To use vCoolor, you need to have:
 
-* [Yad](http://sourceforge.net/projects/yad-dialog/) (Compiled with GTK2 to avoid problem [#1](https://github.com/KabbAmine/vCoolor.vim/issues/1))
+* [Yad](http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem [#1](https://github.com/KabbAmine/vCoolor.vim/issues/1))
 * The plugin [ConvertBase.vim](http://www.vim.org/scripts/script.php?script_id=54) *(You can use Vundle for that as described further)*.
 
 ### Manual installation
@@ -48,12 +48,14 @@ Then proceed to the installation of the plugins with the following command:
 Usage
 -----
 
-In both NORMAL and INSERT modes, only 1 shortcut is needed: `<Alt-C>` (I find it very conveniant :D), but he may be not working on terminal.
+In both NORMAL and INSERT modes, only 1 shortcut is needed: `<Alt-C>` (I find it very convenient :D), but he may be not working on terminal.
 
 Use it:
 
 * To insert a color anywhere.
 * To modify the current hex or rgb color.
+
+Also, using `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
 
 Click on the image for a short screencast.
 
@@ -83,6 +85,11 @@ To change the mapping by default, add to your *vimrc*.
 	nmap <NEW_MAPPING> <Plug>vCoolor	" NORMAL mode
 	imap <NEW_MAPPING> <Plug>vCoolorI	" INSERT mode
 
+And for rgb color insertion
+
+	nmap <NEW_MAPPING> <Plug>vCoolorR	" NORMAL mode
+	imap <NEW_MAPPING> <Plug>vCoolorRI	" INSERT mode
+
 You can use the same mapping for both modes.
 
 TODO
@@ -91,9 +98,10 @@ TODO
 - Windows alternative.
 - A better regex patterns.
 - **+ Handle rgb(%)**
-- Handle rgba, hsv, hsva colors.
+- Handle rgba, hsl and hsla colors.
 - Add possibility to modify 2 or more rgb colors in a line...
 - Add a vim doc file.
+- **+ Insert a rgb color**
 
 Notes
 -------------
@@ -108,4 +116,3 @@ To Yad's author.
 To Bram Moolenaar for creating the best piece of software in the world :D
 
 To you if you're using vCoolor.
-
