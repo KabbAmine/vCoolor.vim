@@ -37,28 +37,29 @@ endfor
 " =====================================================================
 
 " {
-if has('unix') && executable("yad")
-    if !hasmapto('<Plug>vCoolor', 'n')
-        nmap <unique> <A-c> <Plug>vCoolor
-    endif
-    nnoremap <unique> <script> <Plug>vCoolor <SID>VC
-    nnoremap <silent> <SID>VC :call <SID>VCoolor()<CR>
-    if !hasmapto('<Plug>vCoolorI', 'i')
-        imap <unique> <A-c> <Plug>vCoolorI
-    endif
-    inoremap <unique> <script> <Plug>vCoolorI <SID>VCI
-    inoremap <silent> <SID>VCI <Esc>:call <SID>VCoolor()<CR>a
-    if !hasmapto('<Plug>vCoolorR', 'n')
-        nmap <unique> <A-r> <Plug>vCoolorR
-    endif
-    nnoremap <unique> <script> <Plug>vCoolorR <SID>VCR
-    nnoremap <silent> <SID>VCR :call <SID>VCoolorR()<CR>
-    if !hasmapto('<Plug>vCoolorRI', 'i')
-        imap <unique> <A-r> <Plug>vCoolorRI
-    endif
-    inoremap <unique> <script> <Plug>vCoolorRI <SID>VCRI
-    inoremap <silent> <SID>VCRI <Esc>:call <SID>VCoolorR()<CR>a
+
+if !hasmapto('<Plug>vCoolor', 'n')
+    nmap <unique> <A-c> <Plug>vCoolor
+    nmap <unique> <D-c> <Plug>vCoolor
 endif
+nnoremap <unique> <script> <Plug>vCoolor <SID>VC
+nnoremap <silent> <SID>VC :call <SID>VCoolor()<CR>
+if !hasmapto('<Plug>vCoolorI', 'i')
+    imap <unique> <A-c> <Plug>vCoolorI
+endif
+inoremap <unique> <script> <Plug>vCoolorI <SID>VCI
+inoremap <silent> <SID>VCI <Esc>:call <SID>VCoolor()<CR>a
+if !hasmapto('<Plug>vCoolorR', 'n')
+    nmap <unique> <A-r> <Plug>vCoolorR
+endif
+nnoremap <unique> <script> <Plug>vCoolorR <SID>VCR
+nnoremap <silent> <SID>VCR :call <SID>VCoolorR()<CR>
+if !hasmapto('<Plug>vCoolorRI', 'i')
+    imap <unique> <A-r> <Plug>vCoolorRI
+endif
+inoremap <unique> <script> <Plug>vCoolorRI <SID>VCRI
+inoremap <silent> <SID>VCRI <Esc>:call <SID>VCoolorR()<CR>a
+
 " }
 
 " VARIABLES
