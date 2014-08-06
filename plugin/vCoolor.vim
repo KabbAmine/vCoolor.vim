@@ -40,7 +40,6 @@ endfor
 
 if !hasmapto('<Plug>vCoolor', 'n')
     nmap <unique> <A-c> <Plug>vCoolor
-    nmap <unique> <D-c> <Plug>vCoolor
 endif
 nnoremap <unique> <script> <Plug>vCoolor <SID>VC
 nnoremap <silent> <SID>VC :call <SID>VCoolor()<CR>
@@ -286,6 +285,9 @@ function s:ExecPicker(hexColor)
     " Execute the command for the color picker.
 
     let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center"
+    if has("mac")
+        let l:comm = "~/.vim/bundle/vCoolor.vim/osx/color-picker"
+    endif
     let s:newCol = toupper(system(l:comm))
 
     return s:newCol
@@ -440,6 +442,9 @@ function s:VCoolorR()
 	endif
 
 endfunction
+
+command! -nargs=0 VCoolor call s:VCoolor()
+command! -nargs=0 VCoolorR call s:VCoolorR()
 
 let &cpoptions = s:saveCpoptions
 unlet s:saveCpoptions
