@@ -83,13 +83,13 @@ Mapping
 
 To change the mapping by default, add to your *vimrc*.
 
-	nmap <NEW_MAPPING> <Plug>vCoolor	" NORMAL mode
-	imap <NEW_MAPPING> <Plug>vCoolorI	" INSERT mode
+	nmap <NEW_MAPPING> :vCoolor<CR> 	" NORMAL mode
+	imap <NEW_MAPPING> :vCoolor<CR>		" INSERT mode
 
 And for rgb color insertion
 
-	nmap <NEW_MAPPING> <Plug>vCoolorR	" NORMAL mode
-	imap <NEW_MAPPING> <Plug>vCoolorRI	" INSERT mode
+	nmap <NEW_MAPPING> :vCoolorR<CR> 	" NORMAL mode
+	imap <NEW_MAPPING> :vCoolorR<CR>	" INSERT mode
 
 You can use the same mapping for both modes.
 
