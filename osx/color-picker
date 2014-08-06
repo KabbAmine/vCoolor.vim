@@ -1,0 +1,14 @@
+#!/usr/bin/ruby
+
+out = IO.popen [
+ 'osascript',
+ '-e', 'tell application "MacVim.app"',
+ '-e', '  activate',
+ '-e',%|  set Applescript's text item delimiters to {"\n"}|,
+ '-e', '  set col to (choose color) as text',
+ '-e', 'end tell',
+]
+
+print ?#, *out.read.lines.map { |color| '%02x' % (color.to_i / 256) }
+
+# Credit: http://www.reddit.com/r/vim/comments/2crzey/finallly_we_have_a_color_picker_in_vim/cjiiga2
