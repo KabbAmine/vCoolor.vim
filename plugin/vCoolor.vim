@@ -26,9 +26,9 @@ endif
 
 " Conversion commands.
 let s:commandNames = ["Rgb2Hex", "Rgb2RgbPerc", "RgbPerc2Hex", "RgbPerc2Rgb", "Hex2Lit", "Hex2Rgb", "Hex2RgbPerc"]
-for cn in s:commandNames
-    if exists(":".cn."") != 2
-        execute "command! -nargs=1 ".cn." :echo s:".cn."(<args>)"
+for s:cn in s:commandNames
+    if exists(":".s:cn."") != 2
+        execute "command! -nargs=1 ".s:cn." :echo s:".s:cn."(<args>)"
     endif
 endfor
 " }
