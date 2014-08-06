@@ -288,6 +288,11 @@ function s:ExecPicker(hexColor)
     if has("mac")
         let l:comm = "~/.vim/bundle/vCoolor.vim/osx/color-picker"
     endif
+
+    if has("win32")
+        let l:comm = s:path . "/../win32/cpicker.exe"
+    endif
+
     let s:newCol = toupper(system(l:comm))
 
     return s:newCol
