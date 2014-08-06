@@ -61,7 +61,8 @@ Click on the image for a short screencast.
 
 [![Screencast of vCoolor](.img/play-me.jpg)](https://www.youtube.com/watch?v=ZBJ_-Uxm55U)
 
-### Commands
+Commands
+--------
 
 I've used some color conversion commands for debug purpose but I finally decided to keep them in the plugin, they may be useful.
 
