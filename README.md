@@ -114,7 +114,7 @@ TODO
 - ~~Handle rgb(%)~~
 - Handle rgba, hsl and hsla colors.
 - Add possibility to modify 2 or more rgb colors in a line...
-- Add a vim doc file.
+- ~~Add a vim doc file~~
 - ~~Insert a rgb color~~
 
 Notes
