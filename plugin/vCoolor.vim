@@ -2,7 +2,7 @@
 " Version: 0.3
 
 " Creation     : 2014-07-26
-" Modification : 2014-08-06
+" Modification : 2014-08-07
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -19,7 +19,12 @@ set cpoptions&vim
 " COMMANDS
 " =====================================================================
 
-" For debug purpose {
+" {
+" Main commands.
+command! VCoolor call s:VCoolor()
+command! VCoolorR call s:VCoolorR()
+
+" For debug purpose.
 if exists(":GetColor") != 2
     command! GetColor :echo s:GetCurrCol()
 endif
@@ -37,7 +42,6 @@ endfor
 " =====================================================================
 
 " {
-
 if !hasmapto('<Plug>vCoolor', 'n')
     nmap <unique> <A-c> <Plug>vCoolor
 endif
@@ -58,7 +62,6 @@ if !hasmapto('<Plug>vCoolorRI', 'i')
 endif
 inoremap <unique> <script> <Plug>vCoolorRI <SID>VCRI
 inoremap <silent> <SID>VCRI <Esc>:call <SID>VCoolorR()<CR>a
-
 " }
 
 " VARIABLES
@@ -443,8 +446,6 @@ function s:VCoolorR()
 
 endfunction
 
-command! -nargs=0 VCoolor call s:VCoolor()
-command! -nargs=0 VCoolorR call s:VCoolorR()
 
 let &cpoptions = s:saveCpoptions
 unlet s:saveCpoptions
