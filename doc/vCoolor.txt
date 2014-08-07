@@ -1,0 +1,168 @@
+*vCoolor*	Simple color selector/picker plugin.
+
+    For Vim version 7.0 and above	Last change: 2014-08-07
+
+	VCOOLOR - USE GTK+ COLOR SELECTOR/PICKER FROM VIM~
+						from Kabbaj Amine~
+
+Mail	: amine.kabb@gmail.com
+Repo	: https://github.com/KabbAmine/vCoolor.vim
+License : This file is placed in the public domain.
+
+========================================================================
+|CONTENTS|				*vcoolor-contents*
+
+1. DESCRIPTION				|vcoolor-description|
+2. INSTALLATION				|vcoolor-installation|
+    2.1. Manual				|vcoolor-installation:manual|
+    2.2. With Pathogen			|vcoolor-installation:pathogen|
+    2.3. With Vundle			|vcoolor-installation:vundle|
+3. USAGE				|vcoolor-usage|
+4. COMMANDS				|vcoolor-command|
+    4.1. Main commands.			|vcoolor-command:main|
+    4.2. Conversion commands.		|vcoolor-command:conversion|
+5. MAPPING				|vcoolor-mapping|
+    5.1. Default mapping.		|vcoolor-mapping:default|
+    5.2. Custom mapping			|vcoolor-mapping:custom|
+6. NOTES				|vcoolor-notes|
+
+========================================================================
+1. |DESCRIPTION|			*vcoolor-description*
+
+vCoolor is a Vim plugin that allows using a GTK+ color selection dialog via Yad (http://sourceforge.net/projects/yad-dialog/) directly from the editor.
+
+What this plugin do:
+
+* Insert hex or rgb color anywhere.
+* Modify hex color even if there are many colors in 1 line.
+* Modify a rgb color with 0-255 values or % (Only one by line).
+
+What this plugin doesn't do:
+
+* Insert or modify rgba, hsl (Working on it) or hsla colors.
+
+For the moment, this plugin works only on GNU/Linux.
+
+========================================================================
+2. |INSTALLATION|			*zeavim-installation*
+
+To use vCoolor, you need to have:
+
+* Yad (http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem).
+* The plugin ConvertBase.vim (http://www.vim.org/scripts/script.php?script_id=54) (You can use Vundle for that as described further).
+
+------------------------------------------------------------------------
+2.1. Manual installation~
+*vcoolor-installation:manual*
+
+Install the distributed files into Vim runtime directory which is usually `~/.vim/`, or `$HOME/vimfiles` on Windows.
+
+------------------------------------------------------------------------
+2.2. Using Pathogen~
+*vcoolor-installation:pathogen*
+
+If you're using pathogen, extract the files into `bundle` directory.
+
+------------------------------------------------------------------------
+2.3. Using Vundle~
+*vcoolor-installation:vundle*
+
+Just add the following lines in the Vundle part of your vimrc >
+    Plugin 'ConvertBase.vim'
+    Plugin 'KabbAmine/vCoolor.vim'
+Then proceed to the installation of the plugin with the following command: >
+    :PluginInstall
+<
+========================================================================
+3. |USAGE|				*vcoolor-usage*
+
+In both NORMAL and INSERT modes, only 1 shortcut is needed: `<Alt-C>` (I find it very convenient :D), but he may be not working on terminal.
+
+Use it:
+
+* To insert a color anywhere.
+* To modify the current hex or rgb color.
+
+Also, using `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
+
+========================================================================
+4. |COMMANDS|				*vcoolor-command*
+
+------------------------------------------------------------------------
+4.1. Main commands~
+*vcoolor-command:main*
+
+You can execute vCoolor with: >
+	:VCoolor
+	:VCoolorR		" For rgb color insertion
+
+------------------------------------------------------------------------
+4.1. Conversion commands~
+*vcoolor-command:conversion*
+
+I've used some color conversion commands for debug purpose but I finally decided to keep them in the plugin, they may be useful.
+
+Here they are with exemples to understand how they work: >
+	:Rgb2Hex "255, 0, 255"		" Gives "#FF00FF"
+	:Rgb2RgbPerc "255, 0, 255"	" Gives "100%, 0%, 100%"
+
+	:RgbPerc2Hex "100%, 0%, 100%"	" Gives "#FF00FF"
+	:RgbPerc2Rgb "100%, 0%, 100%"	" Gives "255, 0, 255"
+
+	:Hex2Lit "#FF00FF"		" Gives "magenta"
+	:Hex2Rgb "#FF00FF"		" Gives "255, 0, 255"
+	:Hex2RgbPerc "#FF00FF"		" Gives "100%, 0%, 100%"
+
+========================================================================
+5. |MAPPING|				*vcoolor-mapping*
+
+------------------------------------------------------------------------
+5.1. Default mappings~
+*vcoolor-mapping:default*
+
+<A-c>   or	 <Plug>VCoolor
+	Execute the color picker and insert or modify the color in NORMAL mode.
+
+<A-c>   or	 <Plug>VCoolorI
+	Execute the color picker and insert or modify the color in INSERT mode.
+
+<A-r>   or	 <Plug>VCoolorR
+	Execute the color picker and insert rgb color in NORMAL mode.
+
+<A-r>   or	 <Plug>VCoolorR
+	Execute the color picker and insert rgb color in INSERT mode.
+
+------------------------------------------------------------------------
+5.2. Custom mappings~
+*vcoolor-mapping:custom*
+
+To change the mapping by default: >
+	" For NORMAL mode
+	nmap <NEW_MAPPING> <Plug>vCoolor " Or
+	nmap <NEW_MAPPING> :vCoolor<CR>
+	
+	" For INSERT mode
+	imap <NEW_MAPPING> <Plug>vCoolorI " INSERT mode
+
+And for rgb color insertion: >
+	" For NORMAL mode
+	nmap <NEW_MAPPING> <Plug>vCoolorR " Or
+	nmap <NEW_MAPPING> :vCoolorR<CR>
+	" For INSERT mode
+	imap <NEW_MAPPING> <Plug>vCoolorRI " INSERT mode
+
+You can use the same mapping for both modes.
+>
+========================================================================
+6. |NOTES|				*vcoolor-notes*
+
+I'm not very happy with the GTK selection color dialog via Yad (Very limited), but I didn't find a good alternative, I think that I can use python with pygtk but I prefer to stick with pure vimscript and the default unix shell (Bash in my case), so if you aware of something better, let me know.
+
+Thanks to Yad's author.
+
+Thanks to Bram Moolenaar for creating the best piece of software in the world :D
+
+Thanks to you if you're using vCoolor.
+
+========================================================================
+vim:tw=78:ts=8:ft=help:norl:noet
