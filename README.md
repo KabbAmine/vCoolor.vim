@@ -64,7 +64,12 @@ Click on the image for a short screencast.
 Commands
 --------
 
-I've used some color conversion commands for debug purpose but I finally decided to keep them in the plugin, they may be useful.
+You can execute vCoolor with:
+
+	:VCoolor
+    :VCoolorR		" For rgb color insertion
+
+Also, I've used some color conversion commands for debug purpose but I finally decided to keep them in the plugin, they may be useful.
 
 Here they are with exemples to understand how they work:
 
@@ -83,13 +88,21 @@ Mapping
 
 To change the mapping by default, add to your *vimrc*.
 
-	nmap <NEW_MAPPING> <Plug>vCoolor	" NORMAL mode
-	imap <NEW_MAPPING> <Plug>vCoolorI	" INSERT mode
+	" For NORMAL mode
+	nmap <NEW_MAPPING> <Plug>vCoolor " Or
+	nmap <NEW_MAPPING> :vCoolor<CR>
+	
+    " For INSERT mode
+    imap <NEW_MAPPING> <Plug>vCoolorI " INSERT mode
 
 And for rgb color insertion
 
-	nmap <NEW_MAPPING> <Plug>vCoolorR	" NORMAL mode
-	imap <NEW_MAPPING> <Plug>vCoolorRI	" INSERT mode
+	" For NORMAL mode
+	nmap <NEW_MAPPING> <Plug>vCoolorR " Or
+	nmap <NEW_MAPPING> :vCoolorR<CR>
+	
+    " For INSERT mode
+    imap <NEW_MAPPING> <Plug>vCoolorRI " INSERT mode
 
 You can use the same mapping for both modes.
 
@@ -98,11 +111,11 @@ TODO
 
 - Windows alternative.
 - A better regex patterns.
-- **+ Handle rgb(%)**
+- ~~Handle rgb(%)~~
 - Handle rgba, hsl and hsla colors.
 - Add possibility to modify 2 or more rgb colors in a line...
 - Add a vim doc file.
-- **+ Insert a rgb color**
+- ~~Insert a rgb color~~
 
 Notes
 -------------

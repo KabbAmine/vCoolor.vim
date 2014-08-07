@@ -2,7 +2,7 @@
 " Version: 0.3
 
 " Creation     : 2014-07-26
-" Modification : 2014-08-06
+" Modification : 2014-08-07
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -19,7 +19,12 @@ set cpoptions&vim
 " COMMANDS
 " =====================================================================
 
-" For debug purpose {
+" {
+" Main commands.
+command! VCoolor call s:VCoolor()
+command! VCoolorR call s:VCoolorR()
+
+" For debug purpose.
 if exists(":GetColor") != 2
     command! GetColor :echo s:GetCurrCol()
 endif
@@ -37,28 +42,26 @@ endfor
 " =====================================================================
 
 " {
-if has('unix') && executable("yad")
-    if !hasmapto('<Plug>vCoolor', 'n')
-        nmap <unique> <A-c> <Plug>vCoolor
-    endif
-    nnoremap <unique> <script> <Plug>vCoolor <SID>VC
-    nnoremap <silent> <SID>VC :call <SID>VCoolor()<CR>
-    if !hasmapto('<Plug>vCoolorI', 'i')
-        imap <unique> <A-c> <Plug>vCoolorI
-    endif
-    inoremap <unique> <script> <Plug>vCoolorI <SID>VCI
-    inoremap <silent> <SID>VCI <Esc>:call <SID>VCoolor()<CR>a
-    if !hasmapto('<Plug>vCoolorR', 'n')
-        nmap <unique> <A-r> <Plug>vCoolorR
-    endif
-    nnoremap <unique> <script> <Plug>vCoolorR <SID>VCR
-    nnoremap <silent> <SID>VCR :call <SID>VCoolorR()<CR>
-    if !hasmapto('<Plug>vCoolorRI', 'i')
-        imap <unique> <A-r> <Plug>vCoolorRI
-    endif
-    inoremap <unique> <script> <Plug>vCoolorRI <SID>VCRI
-    inoremap <silent> <SID>VCRI <Esc>:call <SID>VCoolorR()<CR>a
+if !hasmapto('<Plug>vCoolor', 'n')
+    nmap <unique> <A-c> <Plug>vCoolor
 endif
+nnoremap <unique> <script> <Plug>vCoolor <SID>VC
+nnoremap <silent> <SID>VC :call <SID>VCoolor()<CR>
+if !hasmapto('<Plug>vCoolorI', 'i')
+    imap <unique> <A-c> <Plug>vCoolorI
+endif
+inoremap <unique> <script> <Plug>vCoolorI <SID>VCI
+inoremap <silent> <SID>VCI <Esc>:call <SID>VCoolor()<CR>a
+if !hasmapto('<Plug>vCoolorR', 'n')
+    nmap <unique> <A-r> <Plug>vCoolorR
+endif
+nnoremap <unique> <script> <Plug>vCoolorR <SID>VCR
+nnoremap <silent> <SID>VCR :call <SID>VCoolorR()<CR>
+if !hasmapto('<Plug>vCoolorRI', 'i')
+    imap <unique> <A-r> <Plug>vCoolorRI
+endif
+inoremap <unique> <script> <Plug>vCoolorRI <SID>VCRI
+inoremap <silent> <SID>VCRI <Esc>:call <SID>VCoolorR()<CR>a
 " }
 
 " VARIABLES
@@ -285,6 +288,9 @@ function s:ExecPicker(hexColor)
     " Execute the command for the color picker.
 
     let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center"
+    if has("mac")
+        let l:comm = "~/.vim/bundle/vCoolor.vim/osx/color-picker"
+    endif
     let s:newCol = toupper(system(l:comm))
 
     return s:newCol
@@ -439,6 +445,7 @@ function s:VCoolorR()
 	endif
 
 endfunction
+
 
 let &cpoptions = s:saveCpoptions
 unlet s:saveCpoptions
