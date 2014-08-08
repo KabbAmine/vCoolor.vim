@@ -288,9 +288,6 @@ function s:ExecPicker(hexColor)
     " Execute the command for the color picker.
 
     let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center"
-    if has("mac")
-        let l:comm = "~/.vim/bundle/vCoolor.vim/osx/color-picker"
-    endif
     let s:newCol = toupper(system(l:comm))
 
     return s:newCol
