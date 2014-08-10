@@ -294,7 +294,7 @@ function s:ExecPicker(hexColor)
     endif
 
     if has("win32")
-        let l:comm = s:path . "/../win32/cpicker.exe"
+        let l:comm = s:path . "/../win32/cpicker.exe ".a:hexColor
     endif
 
     let s:newCol = toupper(system(l:comm))
