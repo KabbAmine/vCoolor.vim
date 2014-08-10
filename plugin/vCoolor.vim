@@ -12,6 +12,9 @@ if exists("g:loadedVCoolor")
 endif
 let g:loadedVCoolor = 1
 
+" Keep track of current working directory of script
+let s:path = expand('<sfile>:p:h')
+
 " To avoid conflict problems.
 let s:saveCpoptions = &cpoptions
 set cpoptions&vim
@@ -285,8 +288,9 @@ function s:ExecPicker(hexColor)
     " Execute the command for the color picker.
 
     let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center"
+
     if has("mac")
-        let l:comm = "~/.vim/bundle/vCoolor.vim/osx/color-picker"
+        let l:comm = s:path . "/../osx/color-picker"
     endif
 
     if has("win32")
