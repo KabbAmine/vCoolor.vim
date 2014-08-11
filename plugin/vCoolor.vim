@@ -391,7 +391,7 @@ function s:Hex2Rgb(hexCol)
 
     let s:color = ""
     for l:element in l:hexColL
-        let l:rgbElem = ConvertFromBase(l:element, 16)
+        let l:rgbElem = str2nr(l:element, 16)
         let l:rgbElem = string(l:rgbElem)
         if !empty(s:color)
             let s:color = s:color.", ".l:rgbElem
