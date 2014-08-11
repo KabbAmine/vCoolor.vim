@@ -305,11 +305,11 @@ function s:Rgb2Hex(rgbCol)
 
     let l:color = ""
     for l:element in copy(l:rgbColL)
-		let l:hexElem = printf('%02x', l:element)
+		let l:hexElem = printf('%02X', l:element)
         let l:color = l:color.l:hexElem
     endfor
 
-    return "#".toupper(l:color)
+    return "#".l:color
 
 endfunction
 function s:Rgb2RgbPerc(rgbCol)
