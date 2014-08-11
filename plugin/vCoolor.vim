@@ -552,9 +552,9 @@ function s:Hsl2Rgb(hslCol)
 
 		let l:varTp1 = 2 * l:l - l:varTp2
 
-		let l:r = float2nr(round(255 * Hue2Rgb(l:varTp1, l:varTp2, (l:h + (1/3.0)))))
-		let l:g = float2nr(round(255 * Hue2Rgb(l:varTp1, l:varTp2, l:h)))
-		let l:b = float2nr(round(255 * Hue2Rgb(l:varTp1, l:varTp2, (l:h - (1/3.0)))))
+		let l:r = float2nr(round(255 * s:Hue2Rgb(l:varTp1, l:varTp2, (l:h + (1/3.0)))))
+		let l:g = float2nr(round(255 * s:Hue2Rgb(l:varTp1, l:varTp2, l:h)))
+		let l:b = float2nr(round(255 * s:Hue2Rgb(l:varTp1, l:varTp2, (l:h - (1/3.0)))))
 
 	endif
 	let s:color = string(l:r).", ".string(l:g).", ".string(l:b)
@@ -562,7 +562,7 @@ function s:Hsl2Rgb(hslCol)
 	return s:color
 
 endfunction
-function Hue2Rgb(v1, v2, vH)
+function s:Hue2Rgb(v1, v2, vH)
 
 	let l:v1 = a:v1
 	let l:v2 = a:v2
