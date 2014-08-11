@@ -638,7 +638,7 @@ function s:VCoolorH()
 	
 	let l:newCol = s:ExecPicker("")
 	if !empty(l:newCol)
-		execute ":normal argb(".s:Hex2Hsl(l:newCol).")"
+		execute ":normal ahsl(".s:Hex2Hsl(l:newCol).")"
 	endif
 
 endfunction
