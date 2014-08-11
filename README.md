@@ -8,13 +8,14 @@ vCoolor is a Vim plugin that allows using a GTK+ color selection dialog via [Yad
 
 What this plugin do:
 
-* Insert hex or rgb color anywhere.
+* Insert hex, rgb or hsl color anywhere.
 * Modify hex color even if there are many colors in 1 line.
 * Modify a rgb color with 0-255 values or % (Only one by line).
+* Modify a hsl color (Only one by line).
 
 What this plugin doesn't do:
 
-* Insert or modify rgba, hsl (Working on it) or hsla colors.
+* Insert or modify rgba or hsla colors.
 
 ![vCoolor](.img/screen.png)
 
@@ -39,7 +40,7 @@ Just add the following line in the Vundle part of your vimrc:
     
 	Plugin 'KabbAmine/vCoolor.vim'
 
-Then proceed to the installation of the plugins with the following command:
+Then proceed to the installation of the plugin with the following command:
 
 	:PluginInstall
 
@@ -51,9 +52,10 @@ In both NORMAL and INSERT modes, only 1 shortcut is needed: `<Alt-C>` (I find it
 Use it:
 
 * To insert a color anywhere.
-* To modify the current hex or rgb color.
+* To modify the current hex, rgb or hsl color.
 
-Also, using `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
+Using `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
+Using `<Alt-V>` you can insert a hsl color anywhere (NORMAL and INSERT modes).
 
 Click on the image for a short screencast.
 
@@ -66,6 +68,7 @@ You can execute vCoolor with:
 
 	:VCoolor
     :VCoolorR		" For rgb color insertion
+    :VCoolorH		" For hsl color insertion
 
 Also, I've used some color conversion commands for debug purpose but I finally decided to keep them in the plugin, they may be useful.
 
@@ -73,13 +76,18 @@ Here they are with exemples to understand how they work:
 
 	:Rgb2Hex "255, 0, 255"			" Gives "#FF00FF"
 	:Rgb2RgbPerc "255, 0, 255"		" Gives "100%, 0%, 100%"
-	
+    :Rgb2Hsl "255, 0, 255"			" Gives "300, 100%, 50%"
+
     :RgbPerc2Hex "100%, 0%, 100%"	" Gives "#FF00FF"
 	:RgbPerc2Rgb "100%, 0%, 100%"	" Gives "255, 0, 255"
-	
+
     :Hex2Lit "#FF00FF"				" Gives "magenta"
 	:Hex2Rgb "#FF00FF"				" Gives "255, 0, 255"
 	:Hex2RgbPerc "#FF00FF"			" Gives "100%, 0%, 100%"
+    :Hex2Hsl "#FF00FF"				" Gives "300, 100%, 50%"
+
+    :Hsl2Rgb "300, 100%, 50%"		" Gives "255, 0, 255"
+    :Hsl2Hex "300, 100%, 50%"		" Gives "#FF00FF"
 
 Mapping
 -------
@@ -93,7 +101,7 @@ To change the mapping by default, add to your *vimrc*.
     " For INSERT mode
     imap <NEW_MAPPING> <Plug>vCoolorI " INSERT mode
 
-And for rgb color insertion
+For rgb color insertion
 
 	" For NORMAL mode
 	nmap <NEW_MAPPING> <Plug>vCoolorR " Or
@@ -102,6 +110,15 @@ And for rgb color insertion
     " For INSERT mode
     imap <NEW_MAPPING> <Plug>vCoolorRI " INSERT mode
 
+And for hsl color insertion
+
+	" For NORMAL mode
+	nmap <NEW_MAPPING> <Plug>vCoolorH " Or
+	nmap <NEW_MAPPING> :vCoolorH<CR>
+	
+    " For INSERT mode
+    imap <NEW_MAPPING> <Plug>vCoolorHI " INSERT mode
+
 You can use the same mapping for both modes.
 
 TODO
@@ -109,11 +126,12 @@ TODO
 
 - Windows alternative.
 - A better regex patterns.
-- ~~Handle rgb(%)~~
-- Handle rgba, hsl and hsla colors.
-- Add possibility to modify 2 or more rgb colors in a line...
-- ~~Add a vim doc file~~
-- ~~Insert a rgb color~~
+- ~~Handle rgb(%).~~
+- ~~Handle hsl.~~
+- Handle rgba and hsla colors.
+- Add possibility to modify 2 or more rgb colors in a line.
+- ~~Add a vim doc file.~~
+- ~~Insert a rgb color.~~
 
 Notes
 -------------
