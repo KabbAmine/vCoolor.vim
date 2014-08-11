@@ -1,8 +1,8 @@
 " Simple color selector/picker plugin.
-" Version: 0.3
+" Version: 0.5
 
 " Creation     : 2014-07-26
-" Modification : 2014-08-07
+" Modification : 2014-08-11
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -30,7 +30,12 @@ if exists(":GetColor") != 2
 endif
 
 " Conversion commands.
-let s:commandNames = ["Rgb2Hex", "Rgb2RgbPerc", "RgbPerc2Hex", "RgbPerc2Rgb", "Hex2Lit", "Hex2Rgb", "Hex2RgbPerc"]
+let s:commandNames = [
+			\ "Rgb2Hex", "Rgb2RgbPerc", "Rgb2Hsl",
+			\ "RgbPerc2Hex", "RgbPerc2Rgb",
+			\ "Hex2Lit", "Hex2Rgb", "Hex2RgbPerc", "Hex2Hsl",
+			\ "Hsl2Rgb", "Hsl2Hex"
+			\ ]
 for s:cn in s:commandNames
     if exists(":".s:cn."") != 2
         execute "command! -nargs=1 ".s:cn." :echo s:".s:cn."(<args>)"
@@ -217,6 +222,37 @@ let s:colorNames = {
 " FUNCTIONS
 " =====================================================================
 
+" General functions
+" ******************
+function s:GetMinVal(list)
+	" Return the minimum value of a list.
+
+	let l:min = a:list[0]
+	if l:min > a:list[1]
+		let l:min = a:list[1]
+	endif
+	if l:min > a:list[2]
+		let l:min = a:list[2]
+	endif
+
+	return l:min
+
+endfunction
+function s:GetMaxVal(list)
+	" Return the maximum value of a list.
+
+	let l:max = a:list[0]
+	if l:max < a:list[1]
+		let l:max = a:list[1]
+	endif
+	if l:max < a:list[2]
+		let l:max = a:list[2]
+	endif
+
+	return l:max
+
+endfunction
+
 " Processing functions
 " ************************
 function s:GetCurrCol()
@@ -224,7 +260,7 @@ function s:GetCurrCol()
     " [
     " currentColorName,
     " currentHexColor,
-    " typeColor (l: literal, n:none, h:hex, r:rgb, rp:rgb(%))
+    " typeColor (l: literal, n:none, h:hex, r:rgb, rp:rgb(%), hs:hsl)
     " ]
 
     let l:cWord = expand("<cWORD>")
@@ -234,6 +270,7 @@ function s:GetCurrCol()
     let l:regexHex = '^.*\(#[a-fA-F0-9]\{3,6}\).*$'
     let l:regexRgb = '^.*\<rgb\>(\(\([ ]*[0-9]\{1,3}[ ]*,\)\{2}[ ]*[0-9]\{1,3}[ ]*\)).*$'
     let l:regexRgbPerc = '^.*\<rgb\>(\(\([ ]*[0-9]\{1,3}%[ ]*,\)\{2}[ ]*[0-9]\{1,3}%[ ]*\)).*$'
+    let l:regexHsl = '^.*\<hsl\>(\(\([ ]*[0-9]\{1,3}%\?[ ]*,\)\{2}[ ]*[0-9]\{1,3}%[ ]*\)).*$'
 
     let s:currColor = ["","",""]
     if has_key(s:colorNames, tolower(l:cword))
@@ -246,6 +283,10 @@ function s:GetCurrCol()
         let s:currColor[0] = substitute(l:getLine, l:regexRgbPerc, '\1', '')
         let s:currColor[1] = s:RgbPerc2Hex(s:currColor[0])
         let s:currColor[2] = "rp"
+    elseif match(l:getLine, l:regexHsl) != -1
+        let s:currColor[0] = substitute(l:getLine, l:regexHsl, '\1', '')
+        let s:currColor[1] = s:Hsl2Hex(s:currColor[0])
+        let s:currColor[2] = "hs"
     elseif match(l:cWord, l:regexHex) != -1
         let s:currColor[0] = substitute(l:cWord, l:regexHex, '\1', '')
         let s:currColor[1] = s:currColor[0]
@@ -271,6 +312,9 @@ function s:SetColorByType(oldColor, newCol)
         execute "silent: s/".l:oldCol."/".l:newCol
     elseif a:oldColor[2] == 'rp'
         let l:newCol = s:Hex2RgbPerc(l:newCol)
+        execute "silent: s/".l:oldCol."/".l:newCol
+    elseif a:oldColor[2] == 'hs'
+        let l:newCol = s:Hex2Hsl(l:newCol)
         execute "silent: s/".l:oldCol."/".l:newCol
     elseif a:oldColor[2] == 'l'
         let l:newCol = s:Hex2Lit(l:newCol)
@@ -411,6 +455,145 @@ function s:Hex2RgbPerc(hexCol)
     let l:color = s:Rgb2RgbPerc(l:rgbCol)
 
     return l:color
+
+endfunction
+function s:Rgb2Hsl(rgbCol)
+	" Convert from rgb to hsl:
+	" 255, 0, 255 => 300, 100%, 50%
+	" Algorithm from http://www.easyrgb.com/index.php?X=MATH&H=18#text18
+
+    let l:rgbCol = substitute(a:rgbCol, " ", "", "g")       " Remove spaces.
+    let l:rgbColL = split(l:rgbCol, ",")
+
+	let l:r = l:rgbColL[0] / 255.0
+	let l:g = l:rgbColL[1] / 255.0
+	let l:b = l:rgbColL[2] / 255.0
+
+	let l:min = s:GetMinVal([l:r,l:g,l:b])
+	let l:max = s:GetMaxVal([l:r,l:g,l:b])
+	let l:delta = l:max - l:min
+
+	let l:l = (l:max + l:min) / 2.0
+
+	if (l:delta == 0)
+		" Achromatic.
+		let l:h = 0
+		let l:s = 0
+	else
+		if (l:l < 0.5)
+			let l:s = l:delta / (l:max + l:min)
+		else
+			let l:s = l:delta / (2 - l:max - l:min)
+		endif
+
+		let l:deltaR = ( ( ( l:max - l:r ) / 6.0 ) + ( l:delta / 2.0 ) ) / l:delta
+		let l:deltaG = ( ( ( l:max - l:g ) / 6.0 ) + ( l:delta / 2.0 ) ) / l:delta
+		let l:deltaB = ( ( ( l:max - l:b ) / 6.0 ) + ( l:delta / 2.0 ) ) / l:delta
+
+		if (l:r == l:max)
+			let l:h = l:deltaB - l:deltaG
+		elseif (l:g == l:max)
+			let l:h = (1/3.0) + l:deltaR - l:deltaB
+		elseif (l:b == l:max)
+			let l:h = (2/3.0) + l:deltaG - l:deltaR
+		endif
+
+		if (l:h < 0)
+			let l:h = l:h + 1
+		endif
+		if (l:h > 1)
+			let l:h = l:h - 1
+		endif
+	endif
+
+	let l:h = float2nr(abs(round(l:h * 360)))
+	let l:s = float2nr(abs(round(l:s * 100)))
+	let l:l = float2nr(abs(round(l:l * 100)))
+
+	let l:color = l:h.", ".l:s."%, ".l:l."%"
+
+	return l:color
+
+endfunction
+function s:Hsl2Rgb(hslCol)
+	" Convert from hsl to rgb:
+	" 300, 100%, 50% => 255, 0, 255
+	" Algorithm from http://www.easyrgb.com/index.php?X=MATH&H=18#text18
+
+	let l:hslColL = matchlist(a:hslCol, '\([ ]*[0-9]\{1,3}[ ]*\),\([ ]*[0-9]\{1,3}%[ ]*\),\([ ]*[0-9]\{1,3}%[ ]*\)')
+	call remove(l:hslColL, 0)
+	call remove(l:hslColL, 3, -1)
+
+	let l:h = str2float(l:hslColL[0]) / 360
+	let l:s = str2float(l:hslColL[1]) / 100
+	let l:l = str2float(l:hslColL[2]) / 100
+
+	if (l:s == 0)
+		let l:r = l:l * 255.0
+		let l:g = l:l * 255.0
+		let l:b = l:l * 255.0
+	else
+		if (l:l < 0.5)
+			let l:varTp2 = l:l * (1 + l:s)
+		else
+			let l:varTp2 = (l:l + l:s) - (l:s * l:l)
+		endif
+
+		let l:varTp1 = 2 * l:l - l:varTp2
+
+		let l:r = float2nr(round(255 * Hue2Rgb(l:varTp1, l:varTp2, (l:h + (1/3.0)))))
+		let l:g = float2nr(round(255 * Hue2Rgb(l:varTp1, l:varTp2, l:h)))
+		let l:b = float2nr(round(255 * Hue2Rgb(l:varTp1, l:varTp2, (l:h - (1/3.0)))))
+
+	endif
+	let s:color = string(l:r).", ".string(l:g).", ".string(l:b)
+
+	return s:color
+
+endfunction
+function Hue2Rgb(v1, v2, vH)
+
+	let l:v1 = a:v1
+	let l:v2 = a:v2
+	let l:vH = a:vH
+	
+	if (l:vH < 0)
+		let l:vH = l:vH + 1
+	endif
+	if (l:vH > 1)
+		let l:vH = l:vH - 1
+	endif
+	if ((6.0 * l:vH) < 1)
+		return (l:v1 + (l:v2 - l:v1) * 6.0 * l:vH)
+	endif
+	if ((2.0 * l:vH) < 1)
+		return (l:v2)
+	endif
+	if ((3.0 * l:vH) < 2)
+		return (l:v1 + (l:v2 - l:v1) * ((2 / 3.0) - l:vH) * 6.0)
+	endif
+
+	return l:v1
+
+endfunction
+function s:Hsl2Hex(hslCol)
+	" Convert from hsl to hex:
+	" 300, 100%, 50% => #FF00FF
+
+	let l:rgbCol = s:Hsl2Rgb(a:hslCol)
+	let s:color = s:Rgb2Hex(l:rgbCol)
+
+	return s:color
+
+endfunction
+function s:Hex2Hsl(hexCol)
+	" Convert from hex to hsl:
+	" #FF00FF => 300, 100%, 50%
+
+	let l:rgbCol = s:Hex2Rgb(a:hexCol)
+	let s:color = s:Rgb2Hsl(l:rgbCol)
+
+	return s:color
 
 endfunction
 
