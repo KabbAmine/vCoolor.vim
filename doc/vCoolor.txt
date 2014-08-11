@@ -49,7 +49,6 @@ For the moment, this plugin works only on GNU/Linux.
 To use vCoolor, you need to have:
 
 * Yad (http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem).
-* The plugin ConvertBase.vim (http://www.vim.org/scripts/script.php?script_id=54) (You can use Vundle for that as described further).
 
 ------------------------------------------------------------------------
 2.1. Manual installation~

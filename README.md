@@ -26,7 +26,6 @@ Installation
 To use vCoolor, you need to have:
 
 * [Yad](http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem [#1](https://github.com/KabbAmine/vCoolor.vim/issues/1))
-* The plugin [ConvertBase.vim](http://www.vim.org/scripts/script.php?script_id=54) *(You can use Vundle for that as described further)*.
 
 ### Manual installation
 
@@ -36,9 +35,8 @@ Install the distributed files into Vim runtime directory which is usually `~/.vi
 If you're using pathogen, extract the files into `bundle` directory.
 
 ### Using Vundle (Best way)
-Just add the following lines in the Vundle part of your vimrc:
+Just add the following line in the Vundle part of your vimrc:
     
-    Plugin 'ConvertBase.vim'
 	Plugin 'KabbAmine/vCoolor.vim'
 
 Then proceed to the installation of the plugins with the following command:
