@@ -23,6 +23,7 @@ set cpoptions&vim
 " Main commands.
 command! VCoolor call s:VCoolor()
 command! VCoolorR call s:VCoolorR()
+command! VCoolorH call s:VCoolorH()
 
 " For debug purpose.
 if exists(":GetColor") != 2
@@ -67,6 +68,16 @@ if !hasmapto('<Plug>vCoolorRI', 'i')
 endif
 inoremap <unique> <script> <Plug>vCoolorRI <SID>VCRI
 inoremap <silent> <SID>VCRI <Esc>:call <SID>VCoolorR()<CR>a
+if !hasmapto('<Plug>vCoolorH', 'n')
+    nmap <unique> <A-v> <Plug>vCoolorH
+endif
+nnoremap <unique> <script> <Plug>vCoolorH <SID>VCH
+nnoremap <silent> <SID>VCH :call <SID>VCoolorH()<CR>
+if !hasmapto('<Plug>vCoolorHI', 'i')
+    imap <unique> <A-v> <Plug>vCoolorHI
+endif
+inoremap <unique> <script> <Plug>vCoolorHI <SID>VCHI
+inoremap <silent> <SID>VCHI <Esc>:call <SID>VCoolorH()<CR>a
 " }
 
 " VARIABLES
@@ -619,6 +630,15 @@ function s:VCoolorR()
 	let l:newCol = s:ExecPicker("")
 	if !empty(l:newCol)
 		execute ":normal argb(".s:Hex2Rgb(l:newCol).")"
+	endif
+
+endfunction
+function s:VCoolorH()
+	" Insert a color in hsl mode.
+	
+	let l:newCol = s:ExecPicker("")
+	if !empty(l:newCol)
+		execute ":normal argb(".s:Hex2Hsl(l:newCol).")"
 	endif
 
 endfunction
