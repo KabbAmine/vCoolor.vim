@@ -101,7 +101,7 @@ Mapping
 To change the mapping by default, add to your *vimrc*.
 
 	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolor " Or
+	nmap <NEW_MAPPING> <Plug>vCoolorC " Or
 	nmap <NEW_MAPPING> :vCoolor<CR>
 	
     " For INSERT mode
