@@ -132,7 +132,7 @@ Here they are with exemples to understand how they work: >
 5.1. Default mappings~
 *vcoolor-mapping:default*
 
-<A-c>   or	 <Plug>VCoolor
+<A-c>   or	 <Plug>VCoolorC
 	Execute the color picker and insert or modify the color in NORMAL mode.
 
 <A-c>   or	 <Plug>VCoolorI
