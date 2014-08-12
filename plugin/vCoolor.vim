@@ -2,7 +2,7 @@
 " Version: 0.5
 
 " Creation     : 2014-07-26
-" Modification : 2014-08-11
+" Modification : 2014-08-12
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -11,6 +11,7 @@ if exists("g:loadedVCoolor")
     finish
 endif
 let g:loadedVCoolor = 1
+
 
 " To avoid conflict problems.
 let s:saveCpoptions = &cpoptions
@@ -83,9 +84,8 @@ inoremap <silent> <SID>VCHI <Esc>:call <SID>VCoolorH()<CR>a
 " VARIABLES
 " =====================================================================
 
-" Local variables
-" ************************
-" 140 html base colors {
+" {
+" 140 html base colors.
 let s:colorNames = {
             \ 'aliceblue': '#F0F8FF',
             \ 'antiquewhite': '#FAEBD7',
@@ -228,6 +228,8 @@ let s:colorNames = {
             \ 'yellow': '#FFFF00',
             \ 'yellowgreen': '#9ACD32'
             \ }
+" Keep track of current working directory of script
+let s:path = expand('<sfile>:p:h')
 " }
 
 " FUNCTIONS
@@ -342,7 +344,13 @@ endfunction
 function s:ExecPicker(hexColor)
     " Execute the command for the color picker.
 
-    let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center"
+	if has("win32")
+		let l:comm = s:path . "/../win32/cpicker.exe ".a:hexColor
+	elseif has("mac")
+		let l:comm = s:path . "/../osx/color-picker"
+	else
+		let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center"
+	endif
     let s:newCol = toupper(system(l:comm))
 
     return s:newCol
