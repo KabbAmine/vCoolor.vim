@@ -48,10 +48,10 @@ endfor
 " =====================================================================
 
 " {
-if !hasmapto('<Plug>vCoolor', 'n')
-    nmap <unique> <A-c> <Plug>vCoolor
+if !hasmapto('<Plug>vCoolorC', 'n')
+    nmap <unique> <A-c> <Plug>vCoolorC
 endif
-nnoremap <unique> <script> <Plug>vCoolor <SID>VC
+nnoremap <unique> <script> <Plug>vCoolorC <SID>VC
 nnoremap <silent> <SID>VC :call <SID>VCoolor()<CR>
 if !hasmapto('<Plug>vCoolorI', 'i')
     imap <unique> <A-c> <Plug>vCoolorI
@@ -574,7 +574,7 @@ function s:Hue2Rgb(v1, v2, vH)
 	let l:v1 = a:v1
 	let l:v2 = a:v2
 	let l:vH = a:vH
-	
+
 	if (l:vH < 0)
 		let l:vH = l:vH + 1
 	endif
@@ -633,7 +633,7 @@ function s:VCoolor()
 endfunction
 function s:VCoolorR()
 	" Insert a color in rgb mode.
-	
+
 	let l:newCol = s:ExecPicker("")
 	if !empty(l:newCol)
 		execute ":normal argb(".s:Hex2Rgb(l:newCol).")"
@@ -642,7 +642,7 @@ function s:VCoolorR()
 endfunction
 function s:VCoolorH()
 	" Insert a color in hsl mode.
-	
+
 	let l:newCol = s:ExecPicker("")
 	if !empty(l:newCol)
 		execute ":normal ahsl(".s:Hex2Hsl(l:newCol).")"
