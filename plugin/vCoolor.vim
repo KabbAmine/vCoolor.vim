@@ -290,7 +290,7 @@ function s:ExecPicker(hexColor)
     let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center"
 
     if has("mac")
-        let l:comm = s:path . "/../osx/color-picker"
+        let l:comm = s:path . "/../osx/color-picker \"".a:hexColor."\""
     endif
 
     let s:newCol = toupper(system(l:comm))

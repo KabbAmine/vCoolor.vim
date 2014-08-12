@@ -1,6 +1,9 @@
 #!/usr/bin/ruby
 
 color = ARGV[0]
+if color == ""
+	color = "#FFAABB"
+end
 
 red = color[1..2].to_i(16) * 257
 green = color[3..4].to_i(16) * 257
