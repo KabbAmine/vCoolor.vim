@@ -384,7 +384,7 @@ function s:Rgb2RgbPerc(rgbCol)
         endif
     endfor
 
-    return color
+    return l:color
 
 endfunction
 function s:RgbPerc2Hex(rgbPercCol)
