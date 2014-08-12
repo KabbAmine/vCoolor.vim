@@ -347,7 +347,7 @@ function s:ExecPicker(hexColor)
 	if has("win32")
 		let l:comm = s:path . "/../win32/cpicker.exe ".a:hexColor
 	elseif has("mac")
-		let l:comm = s:path . "/../osx/color-picker"
+        let l:comm = s:path . "/../osx/color-picker \"".a:hexColor."\""
 	else
 		let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center"
 	endif
