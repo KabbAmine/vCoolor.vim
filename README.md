@@ -4,7 +4,7 @@ vCoolor - Simple color selector/picker plugin for Vim.
 Description
 -----------
 
-vCoolor is a Vim plugin that allows using a GTK+ color selection dialog via [Yad](http://sourceforge.net/projects/yad-dialog/) directly from the editor.
+vCoolor is a Vim plugin that allows using a color picker/selector directly from the editor.
 
 What this plugin do:
 
@@ -17,14 +17,20 @@ What this plugin doesn't do:
 
 * Insert or modify rgba or hsla colors.
 
+In GNU/Linux it uses a simple GTK+ dialog via [Yad](http://sourceforge.net/projects/yad-dialog/).
+
 ![vCoolor](.img/screen.png)
 
-**P.S**: This plugin works only on GNU/Linux (I'll try to find a good windows alternative in the future).
+In windows it uses [colorpicker-windows-commandline](https://github.com/jaxbot/colorpicker-windows-commandline) (The binary is included in the plugin).
+
+![vCoolor](.img/screen-win.png)
+
+In MAC OS it uses a [ruby script](https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker).
 
 Installation
 -------------
 
-To use vCoolor, you need to have:
+To use vCoolor in GNU/Linux, you need to have:
 
 * [Yad](http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem [#1](https://github.com/KabbAmine/vCoolor.vim/issues/1))
 
@@ -124,7 +130,8 @@ You can use the same mapping for both modes.
 TODO
 ----
 
-- Windows alternative.
+- ~~Windows alternative~~.
+- ~~MAC OS alternative~~.
 - A better regex patterns.
 - ~~Handle rgb(%).~~
 - ~~Handle hsl.~~
@@ -144,5 +151,7 @@ Thanks
 To Yad's author.
 
 To Bram Moolenaar for creating the best piece of software in the world :D
+
+To Jonathan Warner [jaxbot](https://github.com/jaxbot) for his contribution.
 
 To you if you're using vCoolor.
