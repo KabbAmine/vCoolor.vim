@@ -1,11 +1,22 @@
 #!/usr/bin/ruby
 
+color = ARGV[0]
+
+red = color[0..1].to_i(16) * 257
+green = color[2..3].to_i(16) * 257
+blue = color[4..5].to_i(16) * 257
+
+red = red.to_s
+green = green.to_s
+blue = blue.to_s
+
 out = IO.popen [
  'osascript',
+ '-e', 'property my_color : {' + red + ',' + green + ',' + blue + '}',
  '-e', 'tell application "MacVim.app"',
  '-e', '  activate',
  '-e',%|  set Applescript's text item delimiters to {"\n"}|,
- '-e', '  set col to (choose color) as text',
+ '-e', '  set col to (choose color default color my_color) as text',
  '-e', 'end tell',
 ]
 
