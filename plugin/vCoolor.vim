@@ -1,5 +1,5 @@
 " Simple color selector/picker plugin.
-" Version: 0.5
+" Version: 0.7
 
 " Creation     : 2014-07-26
 " Modification : 2014-08-12
@@ -11,7 +11,6 @@ if exists("g:loadedVCoolor")
     finish
 endif
 let g:loadedVCoolor = 1
-
 
 " To avoid conflict problems.
 let s:saveCpoptions = &cpoptions
