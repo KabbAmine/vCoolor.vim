@@ -2,9 +2,9 @@
 
 color = ARGV[0]
 
-red = color[0..1].to_i(16) * 257
-green = color[2..3].to_i(16) * 257
-blue = color[4..5].to_i(16) * 257
+red = color[1..2].to_i(16) * 257
+green = color[3..4].to_i(16) * 257
+blue = color[5..6].to_i(16) * 257
 
 red = red.to_s
 green = green.to_s
