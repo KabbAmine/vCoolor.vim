@@ -51,28 +51,28 @@ endfor
 if !hasmapto('<Plug>vCoolorC', 'n')
     nmap <unique> <A-c> <Plug>vCoolorC
 endif
-nnoremap <unique> <script> <Plug>vCoolorC <SID>VC
-nnoremap <silent> <SID>VC :call <SID>VCoolor()<CR>
+nnoremap <unique> <script> <Plug>vCoolorC <SID>VCC
+nnoremap <silent> <SID>VCC :call <SID>VCoolor()<CR>
 if !hasmapto('<Plug>vCoolorI', 'i')
     imap <unique> <A-c> <Plug>vCoolorI
 endif
 inoremap <unique> <script> <Plug>vCoolorI <SID>VCI
 inoremap <silent> <SID>VCI <Esc>:call <SID>VCoolor()<CR>a
-if !hasmapto('<Plug>vCoolorR', 'n')
-    nmap <unique> <A-r> <Plug>vCoolorR
+if !hasmapto('<Plug>vCoolorRC', 'n')
+    nmap <unique> <A-r> <Plug>vCoolorRC
 endif
-nnoremap <unique> <script> <Plug>vCoolorR <SID>VCR
-nnoremap <silent> <SID>VCR :call <SID>VCoolorR()<CR>
+nnoremap <unique> <script> <Plug>vCoolorRC <SID>VCRC
+nnoremap <silent> <SID>VCRC :call <SID>VCoolorR()<CR>
 if !hasmapto('<Plug>vCoolorRI', 'i')
     imap <unique> <A-r> <Plug>vCoolorRI
 endif
 inoremap <unique> <script> <Plug>vCoolorRI <SID>VCRI
 inoremap <silent> <SID>VCRI <Esc>:call <SID>VCoolorR()<CR>a
-if !hasmapto('<Plug>vCoolorH', 'n')
-    nmap <unique> <A-v> <Plug>vCoolorH
+if !hasmapto('<Plug>vCoolorHC', 'n')
+    nmap <unique> <A-v> <Plug>vCoolorHC
 endif
-nnoremap <unique> <script> <Plug>vCoolorH <SID>VCH
-nnoremap <silent> <SID>VCH :call <SID>VCoolorH()<CR>
+nnoremap <unique> <script> <Plug>vCoolorHC <SID>VCHC
+nnoremap <silent> <SID>VCHC :call <SID>VCoolorH()<CR>
 if !hasmapto('<Plug>vCoolorHI', 'i')
     imap <unique> <A-v> <Plug>vCoolorHI
 endif
