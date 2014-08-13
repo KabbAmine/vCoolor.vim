@@ -61,6 +61,7 @@ Use it:
 * To modify the current hex, rgb or hsl color.
 
 Using `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
+
 Using `<Alt-V>` you can insert a hsl color anywhere (NORMAL and INSERT modes).
 
 Click on the image for a short screencast.
