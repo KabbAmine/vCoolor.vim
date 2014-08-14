@@ -111,7 +111,7 @@ To change the mapping by default, add to your *vimrc*.
 For rgb color insertion
 
 	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolorR " Or
+	nmap <NEW_MAPPING> <Plug>vCoolorRC " Or
 	nmap <NEW_MAPPING> :vCoolorR<CR>
 	
     " For INSERT mode
@@ -120,7 +120,7 @@ For rgb color insertion
 And for hsl color insertion
 
 	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolorH " Or
+	nmap <NEW_MAPPING> <Plug>vCoolorHC " Or
 	nmap <NEW_MAPPING> :vCoolorH<CR>
 	
     " For INSERT mode
