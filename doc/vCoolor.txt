@@ -138,16 +138,16 @@ Here they are with exemples to understand how they work: >
 <A-c>   or	 <Plug>VCoolorI
 	Execute the color picker and insert or modify the color in INSERT mode.
 
-<A-r>   or	 <Plug>VCoolorR
+<A-r>   or	 <Plug>VCoolorRC
 	Execute the color picker and insert rgb color in NORMAL mode.
 
-<A-r>   or	 <Plug>VCoolorR
+<A-r>   or	 <Plug>VCoolorRC
 	Execute the color picker and insert rgb color in INSERT mode.
 
-<A-v>   or	 <Plug>VCoolorH
+<A-v>   or	 <Plug>VCoolorHC
 	Execute the color picker and insert hsl color in NORMAL mode.
 
-<A-v>   or	 <Plug>VCoolorH
+<A-v>   or	 <Plug>VCoolorHC
 	Execute the color picker and insert hsl color in INSERT mode.
 
 ------------------------------------------------------------------------
@@ -164,14 +164,14 @@ To change the mapping by default: >
 
 And for rgb color insertion: >
 	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolorR " Or
+	nmap <NEW_MAPPING> <Plug>vCoolorRC " Or
 	nmap <NEW_MAPPING> :vCoolorR<CR>
 	" For INSERT mode
 	imap <NEW_MAPPING> <Plug>vCoolorRI " INSERT mode
 
 And for hsl color insertion: >
 	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolorH " Or
+	nmap <NEW_MAPPING> <Plug>vCoolorHC " Or
 	nmap <NEW_MAPPING> :vCoolorH<CR>
 	" For INSERT mode
 	imap <NEW_MAPPING> <Plug>vCoolorHI " INSERT mode
