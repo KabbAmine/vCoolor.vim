@@ -1,5 +1,5 @@
 " Simple color selector/picker plugin.
-" Version: 0.7
+" Version: 0.8
 
 " Creation     : 2014-07-26
 " Modification : 2014-08-16
@@ -84,6 +84,11 @@ inoremap <silent> <SID>VCHI <Esc>:call <SID>VCoolorH()<CR>a
 " =====================================================================
 
 " {
+" Set new color in lowercase if the global variable is set to 1.
+if !exists("g:vcoolor_lowercase")
+	let g:vcoolor_lowercase = 0
+endif
+
 " 140 html base colors.
 let s:colorNames = {
             \ 'aliceblue': '#F0F8FF',
@@ -356,9 +361,15 @@ function s:ExecPicker(hexColor)
 		endif
 	endif
 
-	let s:newCol = toupper(system(l:comm))
-	if strlen(s:newCol) > 7
+	let s:newCol = system(l:comm)
+	if strlen(s:newCol) >= 13
 		let s:newCol = s:newCol[0:2].s:newCol[5:6].s:newCol[9:10]
+	endif
+
+	if (g:vcoolor_lowercase == 1)
+		let s:newCol = tolower(s:newCol)
+	else
+		let s:newCol = toupper(s:newCol)
 	endif
 
     return s:newCol
