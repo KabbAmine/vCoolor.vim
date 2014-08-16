@@ -22,6 +22,7 @@ out = IO.popen [
  '-e', '  try',
  '-e', '    set col to (choose color default color my_color) as text',
  '-e', '  on error number -128 --',
+ '-e', '    set col to my_color as text',
  '-e', '  end try',
  '-e', 'end tell',
 ]
