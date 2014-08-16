@@ -451,7 +451,7 @@ function s:Hex2Lit(hexCol)
     " Convert from hex to literal name.
     " #FF0000 => red
 
-    let l:colIndex = index(values(s:colorNames), a:hexCol)
+    let l:colIndex = index(values(s:colorNames), toupper(a:hexCol))
 
     if l:colIndex != -1
         let s:color =get(keys(s:colorNames), l:colIndex)
