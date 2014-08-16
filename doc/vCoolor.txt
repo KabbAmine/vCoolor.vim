@@ -1,6 +1,6 @@
 *vCoolor*	Simple color selector/picker plugin.
 
-    For Vim version 7.0 and above	Last change: 2014-08-12
+    For Vim version 7.0 and above	Last change: 2014-08-16
 
 	VCOOLOR - USE COLOR SELECTOR/PICKER FROM VIM~
 						from Kabbaj Amine~
@@ -51,11 +51,9 @@ In windows it uses colorpicker-windows-commandline (https://github.com/jaxbot/co
 In MAC OS it uses a ruby script (https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker).
 
 ========================================================================
-2. |INSTALLATION|			*zeavim-installation*
+2. |INSTALLATION|			*vcoolor-installation*
 
-To use vCoolor in GNU/Linux, you need to have:
-
-* Yad (http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem).
+To use vCoolor in GNU/Linux, you need to have Zenity (Included in most distributions) or Yad (http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem).
 
 ------------------------------------------------------------------------
 2.1. Manual installation~
@@ -157,7 +155,7 @@ Here they are with exemples to understand how they work: >
 To change the mapping by default: >
 	" For NORMAL mode
 	nmap <NEW_MAPPING> <Plug>vCoolorC " Or
-	nmap <NEW_MAPPING> :vCoolor<CR>
+	nmap <NEW_MAPPING> :VCoolor<CR>
 	
 	" For INSERT mode
 	imap <NEW_MAPPING> <Plug>vCoolorI " INSERT mode
@@ -165,14 +163,14 @@ To change the mapping by default: >
 And for rgb color insertion: >
 	" For NORMAL mode
 	nmap <NEW_MAPPING> <Plug>vCoolorRC " Or
-	nmap <NEW_MAPPING> :vCoolorR<CR>
+	nmap <NEW_MAPPING> :VCoolorR<CR>
 	" For INSERT mode
 	imap <NEW_MAPPING> <Plug>vCoolorRI " INSERT mode
 
 And for hsl color insertion: >
 	" For NORMAL mode
 	nmap <NEW_MAPPING> <Plug>vCoolorHC " Or
-	nmap <NEW_MAPPING> :vCoolorH<CR>
+	nmap <NEW_MAPPING> :VCoolorH<CR>
 	" For INSERT mode
 	imap <NEW_MAPPING> <Plug>vCoolorHI " INSERT mode
 
@@ -187,7 +185,7 @@ Thanks to Yad's author.
 
 Thanks to Bram Moolenaar for creating the best piece of software in the world :D
 
-To Jonathan Warner [jaxbot](https://github.com/jaxbot) for his contribution.
+To Jonathan Warner alias [jaxbot](https://github.com/jaxbot) for his contribution.
 
 Thanks to you if you're using vCoolor.
 
