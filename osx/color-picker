@@ -19,7 +19,11 @@ out = IO.popen [
  '-e', 'tell application "MacVim.app"',
  '-e', '  activate',
  '-e',%|  set Applescript's text item delimiters to {"\n"}|,
- '-e', '  set col to (choose color default color my_color) as text',
+ '-e', '  try',
+ '-e', '    set col to (choose color default color my_color) as text',
+ '-e', '  on error number -128 --',
+ '-e', '    set col to my_color as text',
+ '-e', '  end try',
  '-e', 'end tell',
 ]
 
