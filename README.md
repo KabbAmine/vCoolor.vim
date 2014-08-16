@@ -32,9 +32,7 @@ In Mac OSX it uses a [ruby script](https://github.com/KabbAmine/vCoolor.vim/tree
 Installation
 -------------
 
-To use vCoolor in GNU/Linux, you need to have:
-
-* [Yad](http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem [#1](https://github.com/KabbAmine/vCoolor.vim/issues/1))
+To use vCoolor in GNU/Linux, you need to have [Zenity](https://wiki.gnome.org/action/show/Projects/Zenity) (Included in most distributions) or [Yad](http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem [#1](https://github.com/KabbAmine/vCoolor.vim/issues/1))
 
 ### Manual installation
 
@@ -155,6 +153,6 @@ To Yad's author.
 
 To Bram Moolenaar for creating the best piece of software in the world :D
 
-To Jonathan Warner [jaxbot](https://github.com/jaxbot) for his contribution.
+To Jonathan Warner alias [jaxbot](https://github.com/jaxbot) for his contribution.
 
 To you if you're using vCoolor.
