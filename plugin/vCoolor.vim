@@ -2,7 +2,7 @@
 " Version: 0.7
 
 " Creation     : 2014-07-26
-" Modification : 2014-08-14
+" Modification : 2014-08-16
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -341,16 +341,25 @@ function s:SetColorByType(oldColor, newCol)
 
 endfunction
 function s:ExecPicker(hexColor)
-    " Execute the command for the color picker.
+	" Execute the appropriate command for the color picker and
+	" return the new hexadecimal color.
 
 	if has("win32")
 		let l:comm = s:path . "/../win32/cpicker.exe ".a:hexColor
 	elseif has("mac")
-        let l:comm = s:path . "/../osx/color-picker \"".a:hexColor."\""
+		let l:comm = s:path . "/../osx/color-picker \"".a:hexColor."\""
 	else
-		let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center"
+		if executable("yad")
+			let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center 2> /dev/null"
+		else
+			let l:comm = "zenity --title=\"vCoolor\" --color-selection --color=\"".a:hexColor."\" 2> /dev/null"
+		endif
 	endif
-    let s:newCol = toupper(system(l:comm))
+
+	let s:newCol = toupper(system(l:comm))
+	if strlen(s:newCol) > 7
+		let s:newCol = s:newCol[0:2].s:newCol[5:6].s:newCol[9:10]
+	endif
 
     return s:newCol
 
