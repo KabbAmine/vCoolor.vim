@@ -17,7 +17,7 @@ What this plugin doesn't do:
 
 * Insert or modify rgba or hsla colors.
 
-In GNU/Linux it uses a simple GTK+ dialog via [Yad](http://sourceforge.net/projects/yad-dialog/).
+In GNU/Linux it uses a simple GTK+.
 
 ![vCoolor](.img/screen.png)
 
@@ -25,7 +25,7 @@ In windows it uses [colorpicker-windows-commandline](https://github.com/jaxbot/c
 
 ![vCoolor](.img/screen-win.png)
 
-In Mac OSX it uses a [ruby script](https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker) to trigger the system color picker:
+In Mac OSX it uses a [ruby script](https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker) to trigger the system color picker.
 
 ![vCoolor](.img/screen-osx.png)
 
@@ -64,7 +64,7 @@ Using `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
 
 Using `<Alt-V>` you can insert a hsl color anywhere (NORMAL and INSERT modes).
 
-Click on the image for a short screencast.
+Click on the image for a short screencast of the v0.1.
 
 [![Screencast of vCoolor](.img/play-me.jpg)](https://www.youtube.com/watch?v=ZBJ_-Uxm55U)
 
@@ -127,6 +127,13 @@ And for hsl color insertion
     imap <NEW_MAPPING> <Plug>vCoolorHI " INSERT mode
 
 You can use the same mapping for both modes.
+
+Customization
+-------------
+
+To get hex colors in lower case, you can add to your *vimrc*:
+
+	let g:vcoolor_lowercase = 1
 
 TODO
 ----

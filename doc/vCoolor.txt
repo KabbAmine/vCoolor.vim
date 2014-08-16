@@ -24,7 +24,9 @@ License : This file is placed in the public domain.
 5. MAPPING				|vcoolor-mapping|
     5.1. Default mapping.		|vcoolor-mapping:default|
     5.2. Custom mapping			|vcoolor-mapping:custom|
-6. NOTES				|vcoolor-notes|
+6. CUSTOMIZATION			|vcoolor-custom|
+    6.1. g:vcoolor_lowercase		|vcoolor-custom:lowercase|
+7. NOTES				|vcoolor-notes|
 
 ========================================================================
 1. |DESCRIPTION|			*vcoolor-description*
@@ -42,16 +44,15 @@ What this plugin doesn't do:
 
 * Insert or modify rgba or hsla colors.
 
-In GNU/Linux it uses a simple GTK+ dialog via Yad (http://sourceforge.net/projects/yad-dialog/).
-
-![vCoolor](.img/screen.png)
+In GNU/Linux it uses a simple GTK+ dialog.
 
 In windows it uses colorpicker-windows-commandline (https://github.com/jaxbot/colorpicker-windows-commandline) (The binary is included in the plugin).
 
-In MAC OS it uses a ruby script (https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker).
+In Mac OSX it uses a ruby script (https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker) to trigger the system color trigger.
 
 ========================================================================
-2. |INSTALLATION|			*vcoolor-installation*
+2. |INSTALLATION|
+*vcoolor-installation*
 
 To use vCoolor in GNU/Linux, you need to have Zenity (Included in most distributions) or Yad (http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem).
 
@@ -175,9 +176,20 @@ And for hsl color insertion: >
 	imap <NEW_MAPPING> <Plug>vCoolorHI " INSERT mode
 
 You can use the same mapping for both modes.
+
+========================================================================
+6. CUSTOMIZATION|				*vcoolor-custom*
+
+------------------------------------------------------------------------
+6.1. g:vcoolor_lowercase~
+*vcoolor-custom:lowercase*
+
+To get hex colors in lower case, you can add to your vimrc: >
+	let g:vcoolor_lowercase = 1
 >
 ========================================================================
-6. |NOTES|				*vcoolor-notes*
+7. |NOTES|
+*vcoolor-notes*
 
 I'm not very happy with the GTK selection color dialog via Yad (Very limited), but I didn't find a good alternative, I think that I can use python with pygtk but I prefer to stick with pure vimscript and the default unix shell (Bash in my case), so if you aware of something better, let me know.
 
