@@ -25,7 +25,9 @@ In windows it uses [colorpicker-windows-commandline](https://github.com/jaxbot/c
 
 ![vCoolor](.img/screen-win.png)
 
-In MAC OS it uses a [ruby script](https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker).
+In Mac OSX it uses a [ruby script](https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker) to trigger the system color picker:
+
+![vCoolor](.img/screen-osx.png)
 
 Installation
 -------------
