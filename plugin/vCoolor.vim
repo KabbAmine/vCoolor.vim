@@ -357,7 +357,7 @@ function s:ExecPicker(hexColor)
 		if executable("yad")
 			let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center 2> /dev/null"
 		else
-			let l:comm = "zenity --title=\"vCoolor\" --color-selection --color=\"".a:hexColor."\" 2> /dev/null"
+			let l:comm = "zenity --title=\"vCoolor\" --modal --color-selection --color=\"".a:hexColor."\" 2> /dev/null"
 		endif
 	endif
 
