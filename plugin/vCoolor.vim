@@ -2,15 +2,15 @@
 " Version: 0.8
 
 " Creation     : 2014-07-26
-" Modification : 2014-08-16
+" Modification : 2014-08-18
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
 
-if exists("g:loadedVCoolor")
+if exists("g:vcoolor_loaded")
     finish
 endif
-let g:loadedVCoolor = 1
+let g:vcoolor_loaded = 1
 
 " To avoid conflict problems.
 let s:saveCpoptions = &cpoptions
@@ -232,6 +232,7 @@ let s:colorNames = {
             \ 'yellow': '#FFFF00',
             \ 'yellowgreen': '#9ACD32'
             \ }
+
 " Keep track of current working directory of script
 let s:path = expand('<sfile>:p:h')
 " }
