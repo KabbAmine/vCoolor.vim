@@ -17,7 +17,7 @@ What this plugin doesn't do:
 
 * Insert or modify rgba or hsla colors.
 
-In GNU/Linux it uses a simple GTK+.
+In GNU/Linux it uses a simple GTK+ dialog.
 
 ![vCoolor](.img/screen.png)
 
