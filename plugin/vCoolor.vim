@@ -2,7 +2,7 @@
 " Version: 0.8
 
 " Creation     : 2014-07-26
-" Modification : 2014-08-18
+" Modification : 2014-09-07
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -24,6 +24,7 @@ set cpoptions&vim
 command! VCoolor call s:VCoolor()
 command! VCoolorR call s:VCoolorR()
 command! VCoolorH call s:VCoolorH()
+command! -nargs=? VCase :let g:vcoolor_lowercase = g:vcoolor_lowercase == 0 ? 1 : 0
 
 " For debug purpose.
 if exists(":GetColor") != 2

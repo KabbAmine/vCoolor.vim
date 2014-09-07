@@ -1,6 +1,6 @@
 *vCoolor*	Simple color selector/picker plugin.
 
-    For Vim version 7.0 and above	Last change: 2014-08-16
+    For Vim version 7.0 and above	Last change: 2014-09-07
 
 	VCOOLOR - USE COLOR SELECTOR/PICKER FROM VIM~
 						from Kabbaj Amine~
@@ -21,6 +21,7 @@ License : This file is placed in the public domain.
 4. COMMANDS				|vcoolor-command|
     4.1. Main commands.			|vcoolor-command:main|
     4.2. Conversion commands.		|vcoolor-command:conversion|
+    4.3. Various commands.		|vcoolor-command:various|
 5. MAPPING				|vcoolor-mapping|
     5.1. Default mapping.		|vcoolor-mapping:default|
     5.2. Custom mapping			|vcoolor-mapping:custom|
@@ -103,7 +104,7 @@ You can execute vCoolor with: >
 	:VCoolorH		" For hsl color insertion
 
 ------------------------------------------------------------------------
-4.1. Conversion commands~
+4.2. Conversion commands~
 *vcoolor-command:conversion*
 
 I've used some color conversion commands for debug purpose but I finally decided to keep them in the plugin, they may be useful.
@@ -123,6 +124,13 @@ Here they are with exemples to understand how they work: >
 
 	:Hsl2Rgb "300, 100%, 50%"	" Gives "255, 0, 255"
 	:Hsl2Hex "300, 100%, 50%"	" Gives "#FF00FF"
+
+------------------------------------------------------------------------
+4.3. Various commands~
+*vcoolor-command:various*
+
+You can toggle between lower/upper case for the returned hex color with: >
+    :VCase
 
 ========================================================================
 5. |MAPPING|				*vcoolor-mapping*

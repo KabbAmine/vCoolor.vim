@@ -77,6 +77,10 @@ You can execute vCoolor with:
     :VCoolorR		" For rgb color insertion
     :VCoolorH		" For hsl color insertion
 
+You can toggle between lower/upper case for the returned hex color with:
+
+	:VCase
+
 Also, I've used some color conversion commands for debug purpose but I finally decided to keep them in the plugin, they may be useful.
 
 Here they are with exemples to understand how they work:
@@ -131,7 +135,7 @@ You can use the same mapping for both modes.
 Customization
 -------------
 
-To get hex colors in lower case, you can add to your *vimrc*:
+To get hex colors in lower case by default, you can add to your *vimrc*:
 
 	let g:vcoolor_lowercase = 1
 
