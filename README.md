@@ -43,7 +43,7 @@ If you're using pathogen, extract the files into `bundle` directory.
 
 ### Using Vundle (Best way)
 Just add the following line in the Vundle part of your vimrc:
-    
+	
 	Plugin 'KabbAmine/vCoolor.vim'
 
 Then proceed to the installation of the plugin with the following command:
@@ -74,8 +74,8 @@ Commands
 You can execute vCoolor with:
 
 	:VCoolor
-    :VCoolorR		" For rgb color insertion
-    :VCoolorH		" For hsl color insertion
+	:VCoolorR		" For rgb color insertion
+	:VCoolorH		" For hsl color insertion
 
 You can toggle between lower/upper case for the returned hex color with:
 
@@ -87,18 +87,18 @@ Here they are with exemples to understand how they work:
 
 	:Rgb2Hex "255, 0, 255"			" Gives "#FF00FF"
 	:Rgb2RgbPerc "255, 0, 255"		" Gives "100%, 0%, 100%"
-    :Rgb2Hsl "255, 0, 255"			" Gives "300, 100%, 50%"
+	:Rgb2Hsl "255, 0, 255"			" Gives "300, 100%, 50%"
 
-    :RgbPerc2Hex "100%, 0%, 100%"	" Gives "#FF00FF"
+	:RgbPerc2Hex "100%, 0%, 100%"	" Gives "#FF00FF"
 	:RgbPerc2Rgb "100%, 0%, 100%"	" Gives "255, 0, 255"
 
-    :Hex2Lit "#FF00FF"				" Gives "magenta"
+	:Hex2Lit "#FF00FF"				" Gives "magenta"
 	:Hex2Rgb "#FF00FF"				" Gives "255, 0, 255"
 	:Hex2RgbPerc "#FF00FF"			" Gives "100%, 0%, 100%"
-    :Hex2Hsl "#FF00FF"				" Gives "300, 100%, 50%"
+	:Hex2Hsl "#FF00FF"				" Gives "300, 100%, 50%"
 
-    :Hsl2Rgb "300, 100%, 50%"		" Gives "255, 0, 255"
-    :Hsl2Hex "300, 100%, 50%"		" Gives "#FF00FF"
+	:Hsl2Rgb "300, 100%, 50%"		" Gives "255, 0, 255"
+	:Hsl2Hex "300, 100%, 50%"		" Gives "#FF00FF"
 
 Mapping
 -------
@@ -109,8 +109,8 @@ To change the mapping by default, add to your *vimrc*.
 	nmap <NEW_MAPPING> <Plug>vCoolorC " Or
 	nmap <NEW_MAPPING> :VCoolor<CR>
 	
-    " For INSERT mode
-    imap <NEW_MAPPING> <Plug>vCoolorI " INSERT mode
+	" For INSERT mode
+	imap <NEW_MAPPING> <Plug>vCoolorI " INSERT mode
 
 For rgb color insertion
 
@@ -118,8 +118,8 @@ For rgb color insertion
 	nmap <NEW_MAPPING> <Plug>vCoolorRC " Or
 	nmap <NEW_MAPPING> :VCoolorR<CR>
 	
-    " For INSERT mode
-    imap <NEW_MAPPING> <Plug>vCoolorRI " INSERT mode
+	" For INSERT mode
+	imap <NEW_MAPPING> <Plug>vCoolorRI " INSERT mode
 
 And for hsl color insertion
 
@@ -127,8 +127,8 @@ And for hsl color insertion
 	nmap <NEW_MAPPING> <Plug>vCoolorHC " Or
 	nmap <NEW_MAPPING> :VCoolorH<CR>
 	
-    " For INSERT mode
-    imap <NEW_MAPPING> <Plug>vCoolorHI " INSERT mode
+	" For INSERT mode
+	imap <NEW_MAPPING> <Plug>vCoolorHI " INSERT mode
 
 You can use the same mapping for both modes.
 
