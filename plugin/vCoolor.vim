@@ -2,7 +2,7 @@
 " Version: 0.8
 
 " Creation     : 2014-07-26
-" Modification : 2014-09-07
+" Modification : 2014-09-12
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -24,7 +24,7 @@ set cpoptions&vim
 command! VCoolor call s:VCoolor()
 command! VCoolorR call s:VCoolorR()
 command! VCoolorH call s:VCoolorH()
-command! -nargs=? VCase :let g:vcoolor_lowercase = g:vcoolor_lowercase == 0 ? 1 : 0
+command! VCase call s:SetCase()
 
 " For debug purpose.
 if exists(":GetColor") != 2
@@ -376,6 +376,17 @@ function s:ExecPicker(hexColor)
 
     return s:newCol
 
+endfunction
+function s:SetCase()
+	" Set returned hex color case.
+
+	if g:vcoolor_lowercase == 0
+		let g:vcoolor_lowercase = 1
+		echo "Hex color in lowercase"
+	else
+		let g:vcoolor_lowercase = 0
+		echo "Hex color in uppercase"
+	endif
 endfunction
 
 " Conversion functions
