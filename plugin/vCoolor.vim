@@ -57,8 +57,8 @@ execute "nmap <silent> ".s:vcoolInsRMap." :VCoolIns r<CR>"
 execute "imap <silent> ".s:vcoolInsRMap." <C-o>:VCoolIns r<CR>"
 
 let s:vcoolInsHMap = exists('g:vcool_ins_hsl_map') ? g:vcool_ins_hsl_map : '<A-v>'
-execute "nmap <silent> ".s:vcoolInsHslMap." :silent VCoolIns h<CR>"
-execute "imap <silent> ".s:vcoolInsHslMap." <C-o>:VCoolIns h<CR>"
+execute "nmap <silent> ".s:vcoolInsHMap." :silent VCoolIns h<CR>"
+execute "imap <silent> ".s:vcoolInsHMap." <C-o>:VCoolIns h<CR>"
 " }
 
 " VARIABLES
