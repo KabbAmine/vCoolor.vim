@@ -332,9 +332,9 @@ function s:ExecPicker(hexColor)
 	" return the new hexadecimal color.
 
 	if has("win32")
-		let l:comm = s:path . "/../win32/cpicker.exe ".a:hexColor
+		let l:comm = s:path . "/../pickers/win32/cpicker.exe ".a:hexColor
 	elseif has("mac")
-		let l:comm = s:path . "/../osx/color-picker \"".a:hexColor."\""
+		let l:comm = s:path . "/../pickers/osx/color-picker \"".a:hexColor."\""
 	else
 		if executable("yad")
 			let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center 2> /dev/null"
