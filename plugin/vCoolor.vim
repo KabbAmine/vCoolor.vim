@@ -26,9 +26,9 @@ command! -nargs=1 VCoolIns call s:VCoolIns(<f-args>)
 command! VCase call s:SetCase()
 
 " For debug purpose.
-if exists(":GetColor") != 2
-    command! GetColor :echo s:GetCurrCol()
-endif
+" if exists(":GetColor") != 2
+"     command! GetColor :echo s:GetCurrCol()
+" endif
 
 " Conversion commands.
 let s:commandNames = [
@@ -48,36 +48,17 @@ endfor
 " =====================================================================
 
 " {
-if !hasmapto('<Plug>vCoolorC', 'n')
-    nmap <unique> <A-c> <Plug>vCoolorC
-endif
-nnoremap <unique> <script> <Plug>vCoolorC <SID>VCC
-nnoremap <silent> <SID>VCC :call <SID>VCoolor()<CR>
-if !hasmapto('<Plug>vCoolorI', 'i')
-    imap <unique> <A-c> <Plug>vCoolorI
-endif
-inoremap <unique> <script> <Plug>vCoolorI <SID>VCI
-inoremap <silent> <SID>VCI <Esc>:call <SID>VCoolor()<CR>a
-if !hasmapto('<Plug>vCoolorRC', 'n')
-    nmap <unique> <A-r> <Plug>vCoolorRC
-endif
-nnoremap <unique> <script> <Plug>vCoolorRC <SID>VCRC
-nnoremap <silent> <SID>VCRC :call <SID>VCoolorR()<CR>
-if !hasmapto('<Plug>vCoolorRI', 'i')
-    imap <unique> <A-r> <Plug>vCoolorRI
-endif
-inoremap <unique> <script> <Plug>vCoolorRI <SID>VCRI
-inoremap <silent> <SID>VCRI <Esc>:call <SID>VCoolorR()<CR>a
-if !hasmapto('<Plug>vCoolorHC', 'n')
-    nmap <unique> <A-v> <Plug>vCoolorHC
-endif
-nnoremap <unique> <script> <Plug>vCoolorHC <SID>VCHC
-nnoremap <silent> <SID>VCHC :call <SID>VCoolorH()<CR>
-if !hasmapto('<Plug>vCoolorHI', 'i')
-    imap <unique> <A-v> <Plug>vCoolorHI
-endif
-inoremap <unique> <script> <Plug>vCoolorHI <SID>VCHI
-inoremap <silent> <SID>VCHI <Esc>:call <SID>VCoolorH()<CR>a
+let s:vcoolorMap = exists('g:vcoolor_map') ? g:vcoolor_map : '<A-c>'
+execute "nmap <silent> ".s:vcoolorMap." :VCoolor<CR>"
+execute "imap <silent> ".s:vcoolorMap." <C-o>:VCoolor<CR>"
+
+let s:vcoolInsRMap = exists('g:vcool_ins_rgb_map') ? g:vcool_ins_rgb_map : '<A-r>'
+execute "nmap <silent> ".s:vcoolInsRMap." :VCoolIns r<CR>"
+execute "imap <silent> ".s:vcoolInsRMap." <C-o>:VCoolIns r<CR>"
+
+let s:vcoolInsHMap = exists('g:vcool_ins_hsl_map') ? g:vcool_ins_hsl_map : '<A-v>'
+execute "nmap <silent> ".s:vcoolInsHslMap." :silent VCoolIns h<CR>"
+execute "imap <silent> ".s:vcoolInsHslMap." <C-o>:VCoolIns h<CR>"
 " }
 
 " VARIABLES
