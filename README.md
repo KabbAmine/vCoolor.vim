@@ -74,8 +74,8 @@ Commands
 You can execute vCoolor with:
 
 	:VCoolor
-	:VCoolorR		" For rgb color insertion
-	:VCoolorH		" For hsl color insertion
+	:VCoolIns r		" For rgb color insertion
+	:VCoolIns h		" For hsl color insertion
 
 You can toggle between lower/upper case for the returned hex color with:
 
@@ -89,8 +89,8 @@ Here they are with exemples to understand how they work:
 	:Rgb2RgbPerc "255, 0, 255"		" Gives "100%, 0%, 100%"
 	:Rgb2Hsl "255, 0, 255"			" Gives "300, 100%, 50%"
 
-	:RgbPerc2Hex "100%, 0%, 100%"	" Gives "#FF00FF"
-	:RgbPerc2Rgb "100%, 0%, 100%"	" Gives "255, 0, 255"
+	:RgbPerc2Hex "100%, 0%, 100%" " Gives "#FF00FF"
+	:RgbPerc2Rgb "100%, 0%, 100%" " Gives "255, 0, 255"
 
 	:Hex2Lit "#FF00FF"				" Gives "magenta"
 	:Hex2Rgb "#FF00FF"				" Gives "255, 0, 255"
@@ -105,32 +105,11 @@ Mapping
 
 To change the mapping by default, add to your *vimrc*.
 
-	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolorC " Or
-	nmap <NEW_MAPPING> :VCoolor<CR>
-	
-	" For INSERT mode
-	imap <NEW_MAPPING> <Plug>vCoolorI " INSERT mode
+	let g:vcoolor_map = '<NEW_MAPPING>'
+	let g:vcool_ins_rgb_map = '<NEW_MAPPING>'		" Insert rgb color.
+	let g:vcool_ins_hsl_map = '<NEW_MAPPING>'		" Insert hsl color.
 
-For rgb color insertion
-
-	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolorRC " Or
-	nmap <NEW_MAPPING> :VCoolorR<CR>
-	
-	" For INSERT mode
-	imap <NEW_MAPPING> <Plug>vCoolorRI " INSERT mode
-
-And for hsl color insertion
-
-	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolorHC " Or
-	nmap <NEW_MAPPING> :VCoolorH<CR>
-	
-	" For INSERT mode
-	imap <NEW_MAPPING> <Plug>vCoolorHI " INSERT mode
-
-You can use the same mapping for both modes.
+Each mapping works in both `NORMAL` and `INSERT` mode.
 
 Customization
 -------------
@@ -142,20 +121,9 @@ To get hex colors in lower case by default, you can add to your *vimrc*:
 TODO
 ----
 
-- ~~Windows alternative~~.
-- ~~MAC OS alternative~~.
 - A better regex patterns.
-- ~~Handle rgb(%).~~
-- ~~Handle hsl.~~
 - Handle rgba and hsla colors.
 - Add possibility to modify 2 or more rgb colors in a line.
-- ~~Add a vim doc file.~~
-- ~~Insert a rgb color.~~
-
-Notes
--------------
-
-I'm not very happy with the GTK selection color dialog via Yad (Very limited), but I didn't find a good alternative, I think that I can use python with pygtk but I prefer to stick with pure vimscript and the default unix shell (Bash in my case), so if you aware of something better, let me know.
 
 Thanks
 -------

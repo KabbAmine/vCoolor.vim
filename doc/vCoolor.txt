@@ -1,6 +1,6 @@
 *vCoolor*	Simple color selector/picker plugin.
 
-    For Vim version 7.0 and above	Last change: 2014-09-07
+    For Vim version 7.0 and above	Last change: 2014-09-21
 
 	VCOOLOR - USE COLOR SELECTOR/PICKER FROM VIM~
 						from Kabbaj Amine~
@@ -35,20 +35,16 @@ License : This file is placed in the public domain.
 vCoolor is a Vim plugin that allows using a color picker/selector directly from the editor.
 
 What this plugin do:
-
 * Insert hex, rgb or hsl color anywhere.
 * Modify hex color even if there are many colors in 1 line.
 * Modify a rgb color with 0-255 values or % (Only one by line).
 * Modify a hsl color (Only one by line).
 
 What this plugin doesn't do:
-
 * Insert or modify rgba or hsla colors.
 
 In GNU/Linux it uses a simple GTK+ dialog.
-
 In windows it uses colorpicker-windows-commandline (https://github.com/jaxbot/colorpicker-windows-commandline) (The binary is included in the plugin).
-
 In Mac OSX it uses a ruby script (https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker) to trigger the system color trigger.
 
 ========================================================================
@@ -84,7 +80,6 @@ Then proceed to the installation of the plugin with the following command: >
 In both NORMAL and INSERT modes, only 1 shortcut is needed: `<Alt-C>` (I find it very convenient :D), but he may be not working on terminal.
 
 Use it:
-
 * To insert a color anywhere.
 * To modify the current hex, rgb or hsl color.
 
@@ -100,8 +95,8 @@ Using `<Alt-V>` you can insert a hsl color anywhere (NORMAL and INSERT modes).
 
 You can execute vCoolor with: >
 	:VCoolor
-	:VCoolorR		" For rgb color insertion
-	:VCoolorH		" For hsl color insertion
+	:VCoolIns r		" Insert rgb color.
+	:VCoolIns h		" Insert hsl color.
 
 ------------------------------------------------------------------------
 4.2. Conversion commands~
@@ -139,51 +134,31 @@ You can toggle between lower/upper case for the returned hex color with: >
 5.1. Default mappings~
 *vcoolor-mapping:default*
 
-<A-c>   or	 <Plug>VCoolorC
-	Execute the color picker and insert or modify the color in NORMAL mode.
+<A-c>
+	Execute the color picker and insert or modify the color (NORMAL and INSERT modes).
 
-<A-c>   or	 <Plug>VCoolorI
-	Execute the color picker and insert or modify the color in INSERT mode.
+<A-r>
+	Execute the color picker and insert rgb color (NORMAL and
+	INSERT modes).
 
-<A-r>   or	 <Plug>VCoolorRC
-	Execute the color picker and insert rgb color in NORMAL mode.
-
-<A-r>   or	 <Plug>VCoolorRC
-	Execute the color picker and insert rgb color in INSERT mode.
-
-<A-v>   or	 <Plug>VCoolorHC
-	Execute the color picker and insert hsl color in NORMAL mode.
-
-<A-v>   or	 <Plug>VCoolorHC
-	Execute the color picker and insert hsl color in INSERT mode.
+<A-v>
+	Execute the color picker and insert hsl color (NORMAL and
+	INSERT modes).
 
 ------------------------------------------------------------------------
 5.2. Custom mappings~
 *vcoolor-mapping:custom*
 
 To change the mapping by default: >
-	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolorC " Or
-	nmap <NEW_MAPPING> :VCoolor<CR>
-	
-	" For INSERT mode
-	imap <NEW_MAPPING> <Plug>vCoolorI " INSERT mode
+	let g:vcoolor_map = '<NEW_MAPPING>'
 
-And for rgb color insertion: >
-	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolorRC " Or
-	nmap <NEW_MAPPING> :VCoolorR<CR>
-	" For INSERT mode
-	imap <NEW_MAPPING> <Plug>vCoolorRI " INSERT mode
+For rgb color insertion: >
+	let g:vcool_ins_rgb_map = '<NEW_MAPPING>'
 
-And for hsl color insertion: >
-	" For NORMAL mode
-	nmap <NEW_MAPPING> <Plug>vCoolorHC " Or
-	nmap <NEW_MAPPING> :VCoolorH<CR>
-	" For INSERT mode
-	imap <NEW_MAPPING> <Plug>vCoolorHI " INSERT mode
+For hsl color insertion: >
+	let g:vcool_ins_hsl_map = '<NEW_MAPPING>'
 
-You can use the same mapping for both modes.
+Each mapping works in both `NORMAL` and `INSERT` mode.
 
 ========================================================================
 6. CUSTOMIZATION|				*vcoolor-custom*
@@ -198,8 +173,6 @@ To get hex colors in lower case, you can add to your vimrc: >
 ========================================================================
 7. |NOTES|
 *vcoolor-notes*
-
-I'm not very happy with the GTK selection color dialog via Yad (Very limited), but I didn't find a good alternative, I think that I can use python with pygtk but I prefer to stick with pure vimscript and the default unix shell (Bash in my case), so if you aware of something better, let me know.
 
 Thanks to Yad's author.
 
