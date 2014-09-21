@@ -2,7 +2,7 @@
 " Version: 0.8
 
 " Creation     : 2014-07-26
-" Modification : 2014-09-12
+" Modification : 2014-09-21
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -368,11 +368,7 @@ function s:ExecPicker(hexColor)
 		let s:newCol = s:newCol[0:2].s:newCol[5:6].s:newCol[9:10]
 	endif
 
-	if (g:vcoolor_lowercase == 1)
-		let s:newCol = tolower(s:newCol)
-	else
-		let s:newCol = toupper(s:newCol)
-	endif
+	let s:newCol = g:vcoolor_lowercase == 1 ? tolower(s:newCol) : toupper(s:newCol)
 
     return s:newCol
 
