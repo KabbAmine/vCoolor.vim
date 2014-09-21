@@ -22,8 +22,7 @@ set cpoptions&vim
 " {
 " Main commands.
 command! VCoolor call s:VCoolor()
-command! VCoolorR call s:VCoolorR()
-command! VCoolorH call s:VCoolorH()
+command! -nargs=1 VCoolIns call s:VCoolIns(<f-args>)
 command! VCase call s:SetCase()
 
 " For debug purpose.
@@ -660,21 +659,18 @@ function s:VCoolor()
     call setpos(".", s:position)
 
 endfunction
-function s:VCoolorR()
-	" Insert a color in rgb mode.
+function s:VCoolIns(type)
+	" Insert color of type:
+	" - r: rgb mode.
+	" - h: hsl mode.
 
 	let l:newCol = s:ExecPicker("")
 	if !empty(l:newCol)
-		execute ":normal argb(".s:Hex2Rgb(l:newCol).")"
-	endif
-
-endfunction
-function s:VCoolorH()
-	" Insert a color in hsl mode.
-
-	let l:newCol = s:ExecPicker("")
-	if !empty(l:newCol)
-		execute ":normal ahsl(".s:Hex2Hsl(l:newCol).")"
+		if a:type == 'r'
+			execute ":normal argb(".s:Hex2Rgb(l:newCol).")"
+		elseif a:type == 'h'
+			execute ":normal ahsl(".s:Hex2Hsl(l:newCol).")"
+		endif
 	endif
 
 endfunction
