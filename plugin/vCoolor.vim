@@ -1,5 +1,5 @@
 " Simple color selector/picker plugin.
-" Version: 0.8
+" Version: 1.0
 
 " Creation     : 2014-07-26
 " Modification : 2014-09-21
