@@ -2,7 +2,7 @@
 " Version: 1.0
 
 " Creation     : 2014-07-26
-" Modification : 2014-09-21
+" Modification : 2014-09-28
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -50,15 +50,15 @@ endfor
 " {
 let s:vcoolorMap = exists('g:vcoolor_map') ? g:vcoolor_map : '<A-c>'
 execute "nmap <silent> ".s:vcoolorMap." :VCoolor<CR>"
-execute "imap <silent> ".s:vcoolorMap." <C-o>:VCoolor<CR>"
+execute "imap <silent> ".s:vcoolorMap." <left><C-o>:VCoolor<CR><right>"
 
 let s:vcoolInsRMap = exists('g:vcool_ins_rgb_map') ? g:vcool_ins_rgb_map : '<A-r>'
 execute "nmap <silent> ".s:vcoolInsRMap." :VCoolIns r<CR>"
-execute "imap <silent> ".s:vcoolInsRMap." <C-o>:VCoolIns r<CR>"
+execute "imap <silent> ".s:vcoolInsRMap." <left><C-o>:VCoolIns r<CR><right>"
 
 let s:vcoolInsHMap = exists('g:vcool_ins_hsl_map') ? g:vcool_ins_hsl_map : '<A-v>'
 execute "nmap <silent> ".s:vcoolInsHMap." :silent VCoolIns h<CR>"
-execute "imap <silent> ".s:vcoolInsHMap." <C-o>:VCoolIns h<CR>"
+execute "imap <silent> ".s:vcoolInsHMap." <left><C-o>:VCoolIns h<CR><right>"
 " }
 
 " VARIABLES
