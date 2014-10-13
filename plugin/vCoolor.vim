@@ -2,7 +2,7 @@
 " Version: 1.0
 
 " Creation     : 2014-07-26
-" Modification : 2014-09-28
+" Modification : 2014-10-13
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -272,7 +272,10 @@ function s:GetCurrCol()
     let l:regexHsl = '^.*\<hsl\>(\(\([ ]*[0-9]\{1,3}%\?[ ]*,\)\{2}[ ]*[0-9]\{1,3}%[ ]*\)).*$'
 
     let s:currColor = ["","",""]
-    if has_key(s:colorNames, tolower(l:cword))
+    " Nothing or special character under cursor fix.
+    if match(l:cWord, '[(, ]\+') == 0
+        let s:currColor = ["","","n"]
+    elseif has_key(s:colorNames, tolower(l:cword))
         let s:currColor = [l:cword, s:colorNames[l:cword], "l"]
     elseif match(l:getLine, l:regexRgb) != -1
         let s:currColor[0] = substitute(l:getLine, l:regexRgb, '\1', '')
