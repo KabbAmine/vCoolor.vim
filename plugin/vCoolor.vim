@@ -50,15 +50,15 @@ endfor
 " {
 let s:vcoolorMap = exists('g:vcoolor_map') ? g:vcoolor_map : '<A-c>'
 execute "nmap <silent> ".s:vcoolorMap." :VCoolor<CR>"
-execute "imap <silent> ".s:vcoolorMap." <left><C-o>:VCoolor<CR><right>"
+execute "imap <silent> ".s:vcoolorMap." <Esc>:VCoolor<CR>a"
 
 let s:vcoolInsRMap = exists('g:vcool_ins_rgb_map') ? g:vcool_ins_rgb_map : '<A-r>'
 execute "nmap <silent> ".s:vcoolInsRMap." :VCoolIns r<CR>"
-execute "imap <silent> ".s:vcoolInsRMap." <left><C-o>:VCoolIns r<CR><right>"
+execute "imap <silent> ".s:vcoolInsRMap." <Esc>:VCoolIns r<CR>a"
 
 let s:vcoolInsHMap = exists('g:vcool_ins_hsl_map') ? g:vcool_ins_hsl_map : '<A-v>'
 execute "nmap <silent> ".s:vcoolInsHMap." :silent VCoolIns h<CR>"
-execute "imap <silent> ".s:vcoolInsHMap." <left><C-o>:VCoolIns h<CR><right>"
+execute "imap <silent> ".s:vcoolInsHMap." <Esc>:VCoolIns h<CR>a"
 " }
 
 " VARIABLES
