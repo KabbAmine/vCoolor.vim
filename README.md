@@ -8,14 +8,15 @@ vCoolor is a Vim plugin that allows using a color picker/selector directly from 
 
 What this plugin do:
 
-* Insert hex, rgb or hsl color anywhere.
+* Insert hex, rgb, rgba (With 1 in opacity) or hsl color anywhere.
 * Modify hex color even if there are many colors in 1 line.
 * Modify a rgb color with 0-255 values or % (Only one by line).
+* Modify a rgba color but don't change the opacity (Only one by line).
 * Modify a hsl color (Only one by line).
 
 What this plugin doesn't do:
 
-* Insert or modify rgba or hsla colors.
+* Insert or modify hsla colors.
 
 In GNU/Linux it uses a simple GTK+ dialog.
 
@@ -58,11 +59,13 @@ In both NORMAL and INSERT modes, only 1 shortcut is needed: `<Alt-C>` (I find it
 Use it:
 
 * To insert a color anywhere.
-* To modify the current hex, rgb or hsl color.
+* To modify the current hex, rgb, rgba or hsl color.
 
 Using `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
 
 Using `<Alt-V>` you can insert a hsl color anywhere (NORMAL and INSERT modes).
+
+Using `<Alt-W>` you can insert a rgba color anywhere (NORMAL and INSERT modes).
 
 Click on the image for a short screencast of the v0.1.
 
@@ -76,6 +79,7 @@ You can execute vCoolor with:
 	:VCoolor
 	:VCoolIns r		" For rgb color insertion
 	:VCoolIns h		" For hsl color insertion
+	:VCoolIns ra	" For rgba color insertion
 
 You can toggle between lower/upper case for the returned hex color with:
 
@@ -108,6 +112,7 @@ To change the mapping by default, add to your *vimrc*.
 	let g:vcoolor_map = '<NEW_MAPPING>'
 	let g:vcool_ins_rgb_map = '<NEW_MAPPING>'		" Insert rgb color.
 	let g:vcool_ins_hsl_map = '<NEW_MAPPING>'		" Insert hsl color.
+	let g:vcool_ins_rgba_map = '<NEW_MAPPING>'	" Insert rgba color.
 
 Each mapping works in both `NORMAL` and `INSERT` mode.
 
@@ -122,7 +127,7 @@ TODO
 ----
 
 - A better regex patterns.
-- Handle rgba and hsla colors.
+- Handle ~~rgba~~ and hsla colors.
 - Add possibility to modify 2 or more rgb colors in a line.
 
 Thanks

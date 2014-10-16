@@ -1,8 +1,8 @@
 " Simple color selector/picker plugin.
-" Version: 1.0
+" Version: 1.1
 
 " Creation     : 2014-07-26
-" Modification : 2014-10-13
+" Modification : 2014-10-16
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -59,6 +59,10 @@ execute "imap <silent> ".s:vcoolInsRMap." <Esc>:VCoolIns r<CR>a"
 let s:vcoolInsHMap = exists('g:vcool_ins_hsl_map') ? g:vcool_ins_hsl_map : '<A-v>'
 execute "nmap <silent> ".s:vcoolInsHMap." :silent VCoolIns h<CR>"
 execute "imap <silent> ".s:vcoolInsHMap." <Esc>:VCoolIns h<CR>a"
+
+let s:vcoolInsRaMap = exists('g:vcool_ins_rgba_map') ? g:vcool_ins_rgba_map : '<A-w>'
+execute "nmap <silent> ".s:vcoolInsRaMap." :silent VCoolIns ra<CR>"
+execute "imap <silent> ".s:vcoolInsRaMap." <Esc>:VCoolIns ra<CR>a"
 " }
 
 " VARIABLES
@@ -259,7 +263,7 @@ function s:GetCurrCol()
     " [
     " currentColorName,
     " currentHexColor,
-    " typeColor (l: literal, n:none, h:hex, r:rgb, rp:rgb(%), hs:hsl)
+    " typeColor (l: literal, n:none, h:hex, r:rgb, rp:rgb(%), rgba:rgba, hs:hsl)
     " ]
 
     let l:cWord = expand("<cWORD>")
@@ -268,10 +272,11 @@ function s:GetCurrCol()
 
     let l:regexHex = '^.*\(#[a-fA-F0-9]\{3,6}\).*$'
     let l:regexRgb = '^.*\<rgb\>(\(\([ ]*[0-9]\{1,3}[ ]*,\)\{2}[ ]*[0-9]\{1,3}[ ]*\)).*$'
+    let l:regexRgba = '^.*\<rgba\>(\(\([ ]*[0-9]\{1,3}[ ]*,\)\{3}\)[ ]*\([01]\{1}\.\?[0-9]\?\)).*$'
     let l:regexRgbPerc = '^.*\<rgb\>(\(\([ ]*[0-9]\{1,3}%[ ]*,\)\{2}[ ]*[0-9]\{1,3}%[ ]*\)).*$'
     let l:regexHsl = '^.*\<hsl\>(\(\([ ]*[0-9]\{1,3}%\?[ ]*,\)\{2}[ ]*[0-9]\{1,3}%[ ]*\)).*$'
 
-    let s:currColor = ["","",""]
+    let s:currColor = ["", "", ""]
     " Nothing or special character under cursor fix.
     if match(l:cWord, '[(, ]\+') == 0
         let s:currColor = ["","","n"]
@@ -281,6 +286,10 @@ function s:GetCurrCol()
         let s:currColor[0] = substitute(l:getLine, l:regexRgb, '\1', '')
         let s:currColor[1] = s:Rgb2Hex(s:currColor[0])
         let s:currColor[2] = "r"
+    elseif match(l:getLine, l:regexRgba) != -1
+        let s:currColor[0] = substitute(l:getLine, l:regexRgba, '\1', '')
+        let s:currColor[1] = s:Rgb2Hex(s:currColor[0])
+        let s:currColor[2] = "rgba"
     elseif match(l:getLine, l:regexRgbPerc) != -1
         let s:currColor[0] = substitute(l:getLine, l:regexRgbPerc, '\1', '')
         let s:currColor[1] = s:RgbPerc2Hex(s:currColor[0])
@@ -312,6 +321,9 @@ function s:SetColorByType(oldColor, newCol)
     if a:oldColor[2] == 'r'
         let l:newCol = s:Hex2Rgb(l:newCol)
         execute "silent: s/".l:oldCol."/".l:newCol
+	elseif a:oldColor[2] == 'rgba'
+        let l:newCol = s:Hex2Rgb(l:newCol)
+        execute "silent: s/".l:oldCol."/".l:newCol.","
     elseif a:oldColor[2] == 'rp'
         let l:newCol = s:Hex2RgbPerc(l:newCol)
         execute "silent: s/".l:oldCol."/".l:newCol
@@ -475,7 +487,6 @@ function s:Hex2Rgb(hexCol)
     endfor
 
     return s:color
-
 endfunction
 function s:Hex2RgbPerc(hexCol)
     " Convert from hex to rgb (%):
@@ -647,6 +658,7 @@ function s:VCoolIns(type)
 	" Insert color of type:
 	" - r: rgb mode.
 	" - h: hsl mode.
+	" - ra: rgba mode.
 
 	let l:newCol = s:ExecPicker("")
 	if !empty(l:newCol)
@@ -654,6 +666,8 @@ function s:VCoolIns(type)
 			execute ":normal argb(".s:Hex2Rgb(l:newCol).")"
 		elseif a:type == 'h'
 			execute ":normal ahsl(".s:Hex2Hsl(l:newCol).")"
+		elseif a:type == 'ra'
+			execute ":normal argba(".s:Hex2Rgb(l:newCol).", 1)"
 		endif
 	endif
 
