@@ -2,7 +2,7 @@
 " Version: 1.1
 
 " Creation     : 2014-07-26
-" Modification : 2014-10-16
+" Modification : 2015-02-01
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -334,6 +334,9 @@ function s:SetColorByType(oldColor, newCol)
         let l:newCol = s:Hex2Lit(l:newCol)
         execute "silent: s/".l:oldCol."/".l:newCol
     elseif a:oldColor[2] == 'n'
+        if expand("<cword>") == '#'
+            :normal x
+        endif
         execute ":normal a".l:newCol
         let s:position = getpos(".")
     else
