@@ -2,11 +2,12 @@
 " Version: 1.1
 
 " Creation     : 2014-07-26
-" Modification : 2015-02-01
+" Modification : 2015-03-13
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
 
+" Vim options {{{1
 if exists("g:vcoolor_loaded")
     finish
 endif
@@ -15,22 +16,23 @@ let g:vcoolor_loaded = 1
 " To avoid conflict problems.
 let s:saveCpoptions = &cpoptions
 set cpoptions&vim
+" }}}
+
 
 " COMMANDS
 " =====================================================================
 
-" {
-" Main commands.
+" Main commands {{{1
 command! VCoolor call s:VCoolor()
 command! -nargs=1 VCoolIns call s:VCoolIns(<f-args>)
 command! VCase call s:SetCase()
-
-" For debug purpose.
+" }}}
+" For debug purpose. {{{1
 " if exists(":GetColor") != 2
 "     command! GetColor :echo s:GetCurrCol()
 " endif
-
-" Conversion commands.
+" }}}
+" Conversion commands. {{{1
 let s:commandNames = [
 			\ "Rgb2Hex", "Rgb2RgbPerc", "Rgb2Hsl",
 			\ "RgbPerc2Hex", "RgbPerc2Rgb",
@@ -42,12 +44,12 @@ for s:cn in s:commandNames
         execute "command! -nargs=1 ".s:cn." :echo s:".s:cn."(<args>)"
     endif
 endfor
-" }
+" }}}
 
 " MAPPINGS
 " =====================================================================
 
-" {
+" {{{1
 let s:vcoolorMap = exists('g:vcoolor_map') ? g:vcoolor_map : '<A-c>'
 execute "nmap <silent> ".s:vcoolorMap." :VCoolor<CR>"
 execute "imap <silent> ".s:vcoolorMap." <Esc>:VCoolor<CR>a"
@@ -63,18 +65,17 @@ execute "imap <silent> ".s:vcoolInsHMap." <Esc>:VCoolIns h<CR>a"
 let s:vcoolInsRaMap = exists('g:vcool_ins_rgba_map') ? g:vcool_ins_rgba_map : '<A-w>'
 execute "nmap <silent> ".s:vcoolInsRaMap." :silent VCoolIns ra<CR>"
 execute "imap <silent> ".s:vcoolInsRaMap." <Esc>:VCoolIns ra<CR>a"
-" }
+" }}}
 
 " VARIABLES
 " =====================================================================
 
-" {
-" Set new color in lowercase if the global variable is set to 1.
+" Set new color in lowercase if the global variable is set to 1. " {{{1
 if !exists("g:vcoolor_lowercase")
 	let g:vcoolor_lowercase = 0
 endif
-
-" 140 html base colors.
+" }}}
+" 140 html base colors. {{{1
 let s:colorNames = {
             \ 'aliceblue': '#F0F8FF',
             \ 'antiquewhite': '#FAEBD7',
@@ -217,17 +218,17 @@ let s:colorNames = {
             \ 'yellow': '#FFFF00',
             \ 'yellowgreen': '#9ACD32'
             \ }
-
-" Keep track of current working directory of script
+" }}}
+" Keep track of current working directory of script {{{1
 let s:path = expand('<sfile>:p:h')
-" }
+" }}}
 
 " FUNCTIONS
 " =====================================================================
 
 " General functions
 " ******************
-function s:GetMinVal(list)
+function s:GetMinVal(list) " {{{1
 	" Return the minimum value of a list.
 
 	let l:min = a:list[0]
@@ -241,7 +242,7 @@ function s:GetMinVal(list)
 	return l:min
 
 endfunction
-function s:GetMaxVal(list)
+function s:GetMaxVal(list) " {{{1
 	" Return the maximum value of a list.
 
 	let l:max = a:list[0]
@@ -255,10 +256,11 @@ function s:GetMaxVal(list)
 	return l:max
 
 endfunction
+" }}}
 
 " Processing functions
 " ************************
-function s:GetCurrCol()
+function s:GetCurrCol() " {{{1
     " Get current color and return a list:
     " [
     " currentColorName,
@@ -311,7 +313,7 @@ function s:GetCurrCol()
     return s:currColor
 
 endfunction
-function s:SetColorByType(oldColor, newCol)
+function s:SetColorByType(oldColor, newCol) " {{{1
     " Set the correct color depending of the old color
     " type (hex, rgb, literal, none ...).
 
@@ -345,7 +347,7 @@ function s:SetColorByType(oldColor, newCol)
     endif
 
 endfunction
-function s:ExecPicker(hexColor)
+function s:ExecPicker(hexColor) " {{{1
 	" Execute the appropriate command for the color picker and
 	" return the new hexadecimal color.
 
@@ -371,7 +373,7 @@ function s:ExecPicker(hexColor)
     return s:newCol
 
 endfunction
-function s:SetCase()
+function s:SetCase() " {{{1
 	" Set returned hex color case.
 
 	if g:vcoolor_lowercase == 0
@@ -382,10 +384,11 @@ function s:SetCase()
 		echo "Hex color in uppercase"
 	endif
 endfunction
+" }}}
 
 " Conversion functions
 " ************************
-function s:Rgb2Hex(rgbCol)
+function s:Rgb2Hex(rgbCol) " {{{1
     " Convert from rgb to hex:
     " 255, 0, 255 => #FF00FF
 
@@ -401,7 +404,7 @@ function s:Rgb2Hex(rgbCol)
     return "#".l:color
 
 endfunction
-function s:Rgb2RgbPerc(rgbCol)
+function s:Rgb2RgbPerc(rgbCol) " {{{1
     " Convert from rgb to rgb (%):
     " 255, 0, 255 => 100%, 0%, 100%
 
@@ -421,7 +424,7 @@ function s:Rgb2RgbPerc(rgbCol)
     return l:color
 
 endfunction
-function s:RgbPerc2Hex(rgbPercCol)
+function s:RgbPerc2Hex(rgbPercCol) " {{{1
     " Convert from rgb (%) to hex:
     " 100%, 0%, 100% => #FF00FF
 
@@ -431,7 +434,7 @@ function s:RgbPerc2Hex(rgbPercCol)
     return l:color
 
 endfunction
-function s:RgbPerc2Rgb(rgbPercCol)
+function s:RgbPerc2Rgb(rgbPercCol) " {{{1
     " Convert from rgb (%) to rgb:
     " 100%, 0%, 0% => 255, 0, 0
 
@@ -454,7 +457,7 @@ function s:RgbPerc2Rgb(rgbPercCol)
     return l:color
 
 endfunction
-function s:Hex2Lit(hexCol)
+function s:Hex2Lit(hexCol) " {{{1
     " Convert from hex to literal name.
     " #FF0000 => red
 
@@ -469,7 +472,7 @@ function s:Hex2Lit(hexCol)
     return s:color
 
 endfunction
-function s:Hex2Rgb(hexCol)
+function s:Hex2Rgb(hexCol) " {{{1
     " Convert from hex to rgb:
     " #FF00FF => 255, 0, 255
 
@@ -491,7 +494,7 @@ function s:Hex2Rgb(hexCol)
 
     return s:color
 endfunction
-function s:Hex2RgbPerc(hexCol)
+function s:Hex2RgbPerc(hexCol) " {{{1
     " Convert from hex to rgb (%):
     " #FF00FF => 100%, 0, 100%
 
@@ -501,7 +504,7 @@ function s:Hex2RgbPerc(hexCol)
     return l:color
 
 endfunction
-function s:Rgb2Hsl(rgbCol)
+function s:Rgb2Hsl(rgbCol) " {{{1
 	" Convert from rgb to hsl:
 	" 255, 0, 255 => 300, 100%, 50%
 	" Algorithm from http://www.easyrgb.com/index.php?X=MATH&H=18#text18
@@ -559,7 +562,7 @@ function s:Rgb2Hsl(rgbCol)
 	return l:color
 
 endfunction
-function s:Hsl2Rgb(hslCol)
+function s:Hsl2Rgb(hslCol) " {{{1
 	" Convert from hsl to rgb:
 	" 300, 100%, 50% => 255, 0, 255
 	" Algorithm from http://www.easyrgb.com/index.php?X=MATH&H=18#text18
@@ -595,7 +598,7 @@ function s:Hsl2Rgb(hslCol)
 	return s:color
 
 endfunction
-function s:Hue2Rgb(v1, v2, vH)
+function s:Hue2Rgb(v1, v2, vH) " {{{1
 
 	let l:v1 = a:v1
 	let l:v2 = a:v2
@@ -620,7 +623,7 @@ function s:Hue2Rgb(v1, v2, vH)
 	return l:v1
 
 endfunction
-function s:Hsl2Hex(hslCol)
+function s:Hsl2Hex(hslCol) " {{{1
 	" Convert from hsl to hex:
 	" 300, 100%, 50% => #FF00FF
 
@@ -630,7 +633,7 @@ function s:Hsl2Hex(hslCol)
 	return s:color
 
 endfunction
-function s:Hex2Hsl(hexCol)
+function s:Hex2Hsl(hexCol) " {{{1
 	" Convert from hex to hsl:
 	" #FF00FF => 300, 100%, 50%
 
@@ -640,10 +643,11 @@ function s:Hex2Hsl(hexCol)
 	return s:color
 
 endfunction
+" }}}
 
 " Main functions
 " ************************
-function s:VCoolor()
+function s:VCoolor() " {{{1
 
     let s:position = getpos(".")
 
@@ -657,7 +661,7 @@ function s:VCoolor()
     call setpos(".", s:position)
 
 endfunction
-function s:VCoolIns(type)
+function s:VCoolIns(type) " {{{1
 	" Insert color of type:
 	" - r: rgb mode.
 	" - h: hsl mode.
@@ -675,7 +679,12 @@ function s:VCoolIns(type)
 	endif
 
 endfunction
+" }}}
 
 
+" Restore default vim options {{{1
 let &cpoptions = s:saveCpoptions
 unlet s:saveCpoptions
+" }}}
+
+" vim:ft=vim:fdm=marker:fmr={{{,}}}:
