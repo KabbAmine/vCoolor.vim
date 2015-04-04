@@ -342,9 +342,9 @@ fun! vcoolor#convert#Hsl2Rgb(hslCol) " {{{1
 	let l:l = str2float(l:hslColL[2]) / 100
 
 	if (l:s == 0)
-		let l:r = l:l * 255.0
-		let l:g = l:l * 255.0
-		let l:b = l:l * 255.0
+		let l:r2 = l:l * 256.0
+		let l:g2 = l:l * 255.0
+		let l:b2 = l:l * 255.0
 	else
 		if (l:l < 0.5)
 			let l:varTp2 = l:l * (1 + l:s)
@@ -354,12 +354,12 @@ fun! vcoolor#convert#Hsl2Rgb(hslCol) " {{{1
 
 		let l:varTp1 = 2 * l:l - l:varTp2
 
-		let l:r = float2nr(round(255 * vcoolor#convert#Hue2Rgb(l:varTp1, l:varTp2, (l:h + (1/3.0)))))
-		let l:g = float2nr(round(255 * vcoolor#convert#Hue2Rgb(l:varTp1, l:varTp2, l:h)))
-		let l:b = float2nr(round(255 * vcoolor#convert#Hue2Rgb(l:varTp1, l:varTp2, (l:h - (1/3.0)))))
-
+		let l:r2 = float2nr(round(255 * vcoolor#convert#Hue2Rgb(l:varTp1, l:varTp2, (l:h + (1/3.0)))))
+		let l:g2 = float2nr(round(255 * vcoolor#convert#Hue2Rgb(l:varTp1, l:varTp2, l:h)))
+		let l:b2 = float2nr(round(255 * vcoolor#convert#Hue2Rgb(l:varTp1, l:varTp2, (l:h - (1/3.0)))))
 	endif
-	let l:color = string(l:r).", ".string(l:g).", ".string(l:b)
+
+	let l:color = string(l:r2) . ", " . string(l:g2) . ", " . string(l:b2)
 
 	return l:color
 
