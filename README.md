@@ -18,7 +18,7 @@ What this plugin doesn't do:
 
 * Insert or modify hsla colors.
 
-In GNU/Linux it uses a simple GTK+ dialog.
+In GNU/Linux it uses a simple GTK+ dialog via [Zenity](https://wiki.gnome.org/action/show/Projects/Zenity) or [Yad](http://sourceforge.net/projects/yad-dialog/).
 
 ![vCoolor](.img/screen.png)
 
@@ -33,7 +33,7 @@ In Mac OSX it uses a [ruby script](https://github.com/KabbAmine/vCoolor.vim/tree
 Installation
 -------------
 
-To use vCoolor in GNU/Linux, you need to have [Zenity](https://wiki.gnome.org/action/show/Projects/Zenity) (Included in most distributions) or [Yad](http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem [#1](https://github.com/KabbAmine/vCoolor.vim/issues/1))
+To use vCoolor in GNU/Linux, you need to have [Zenity](https://wiki.gnome.org/action/show/Projects/Zenity) (Included in most distributions) or [Yad](http://sourceforge.net/projects/yad-dialog/) (If you compile it manually, do it with GTK2 to avoid problem [#1](https://github.com/KabbAmine/vCoolor.vim/issues/1)).
 
 ### Manual installation
 
@@ -61,11 +61,11 @@ Use it:
 * To insert a color anywhere.
 * To modify the current hex, rgb, rgba or hsl color.
 
-Using `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
+And using:
 
-Using `<Alt-V>` you can insert a hsl color anywhere (NORMAL and INSERT modes).
-
-Using `<Alt-W>` you can insert a rgba color anywhere (NORMAL and INSERT modes).
+* `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
+* `<Alt-V>` you can insert a hsl color anywhere (NORMAL and INSERT modes).
+* `<Alt-W>` you can insert a rgba color anywhere (NORMAL and INSERT modes).
 
 Click on the image for a short screencast of the v0.1.
 
@@ -112,14 +112,18 @@ To change the mapping by default, add to your *vimrc*.
 	let g:vcoolor_map = '<NEW_MAPPING>'
 	let g:vcool_ins_rgb_map = '<NEW_MAPPING>'		" Insert rgb color.
 	let g:vcool_ins_hsl_map = '<NEW_MAPPING>'		" Insert hsl color.
-	let g:vcool_ins_rgba_map = '<NEW_MAPPING>'	" Insert rgba color.
+	let g:vcool_ins_rgba_map = '<NEW_MAPPING>'		" Insert rgba color.
 
-Each mapping works in both `NORMAL` and `INSERT` mode.
+Each mapping works in both `NORMAL` and `INSERT` mode (You can disable all of them, see Customization part for tha).
 
 Customization
 -------------
 
-To get hex colors in lower case by default, you can add to your *vimrc*:
+To disable all default mappings and map only what you want, add to your *vimrc*:
+
+	let g:vcoolor_disable_mappings = 1
+
+To get hex colors in lower case by default:
 
 	let g:vcoolor_lowercase = 1
 

@@ -2,7 +2,7 @@
 " Version: 1.1
 
 " Creation     : 2014-07-26
-" Modification : 2015-04-04
+" Modification : 2015-04-05
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -50,19 +50,25 @@ endfor
 " =====================================================================
 
 " {{{1
-let s:vcoolorMap = exists('g:vcoolor_map') ? g:vcoolor_map : '<A-c>'
+let s:vcoolorMap = exists('g:vcoolor_disable_mappings') ? '' : '<A-c>'
+let s:vcoolInsRMap = exists('g:vcoolor_disable_mappings') ? '' : '<A-r>'
+let s:vcoolInsHMap = exists('g:vcoolor_disable_mappings') ? '' : '<A-v>'
+let s:vcoolInsRaMap = exists('g:vcoolor_disable_mappings') ? '' : '<A-w>'
+
+let s:vcoolorMap = exists('g:vcoolor_map') ? g:vcoolor_map : s:vcoolorMap
+let s:vcoolInsRMap = exists('g:vcool_ins_rgb_map') ? g:vcool_ins_rgb_map : s:vcoolInsRMap
+let s:vcoolInsHMap = exists('g:vcool_ins_hsl_map') ? g:vcool_ins_hsl_map : s:vcoolInsHMap
+let s:vcoolInsRaMap = exists('g:vcool_ins_rgba_map') ? g:vcool_ins_rgba_map : s:vcoolInsRaMap
+
 execute "nmap <silent> ".s:vcoolorMap." :VCoolor<CR>"
 execute "imap <silent> ".s:vcoolorMap." <Esc>:VCoolor<CR>a"
 
-let s:vcoolInsRMap = exists('g:vcool_ins_rgb_map') ? g:vcool_ins_rgb_map : '<A-r>'
 execute "nmap <silent> ".s:vcoolInsRMap." :VCoolIns r<CR>"
 execute "imap <silent> ".s:vcoolInsRMap." <Esc>:VCoolIns r<CR>a"
 
-let s:vcoolInsHMap = exists('g:vcool_ins_hsl_map') ? g:vcool_ins_hsl_map : '<A-v>'
 execute "nmap <silent> ".s:vcoolInsHMap." :silent VCoolIns h<CR>"
 execute "imap <silent> ".s:vcoolInsHMap." <Esc>:VCoolIns h<CR>a"
 
-let s:vcoolInsRaMap = exists('g:vcool_ins_rgba_map') ? g:vcool_ins_rgba_map : '<A-w>'
 execute "nmap <silent> ".s:vcoolInsRaMap." :silent VCoolIns ra<CR>"
 execute "imap <silent> ".s:vcoolInsRaMap." <Esc>:VCoolIns ra<CR>a"
 " }}}
