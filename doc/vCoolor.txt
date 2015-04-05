@@ -1,6 +1,6 @@
 *vCoolor*	Simple color selector/picker plugin.
 
-    For Vim version 7.0 and above	Last change: 2014-09-21
+    For Vim version 7.0 and above	Last change: 2015-04-05
 
 	VCOOLOR - USE COLOR SELECTOR/PICKER FROM VIM~
 						from Kabbaj Amine~
@@ -16,7 +16,7 @@ License : This file is placed in the public domain.
 2. INSTALLATION				|vcoolor-installation|
     2.1. Manual				|vcoolor-installation:manual|
     2.2. With Pathogen			|vcoolor-installation:pathogen|
-    2.3. With Vundle			|vcoolor-installation:vundle|
+    2.3. With a vim plugin manager	|vcoolor-installation:vimplug|
 3. USAGE				|vcoolor-usage|
 4. COMMANDS				|vcoolor-command|
     4.1. Main commands.			|vcoolor-command:main|
@@ -27,6 +27,7 @@ License : This file is placed in the public domain.
     5.2. Custom mapping			|vcoolor-mapping:custom|
 6. CUSTOMIZATION			|vcoolor-custom|
     6.1. g:vcoolor_lowercase		|vcoolor-custom:lowercase|
+    6.2. g:vcoolor_disable_mappings	|vcoolor-custom:disable-maps|
 7. NOTES				|vcoolor-notes|
 
 ========================================================================
@@ -67,14 +68,13 @@ Install the distributed files into Vim runtime directory which is usually `~/.vi
 If you're using pathogen, extract the files into `bundle` directory.
 
 ------------------------------------------------------------------------
-2.3. Using Vundle~
-*vcoolor-installation:vundle*
+2.3. Using a vim plugin manager~
+*vcoolor-installation:vimplug*
 
-Just add the following line in the Vundle part of your vimrc >
-    Plugin 'KabbAmine/vCoolor.vim'
-Then proceed to the installation of the plugin with the following command: >
-    :PluginInstall
-<
+The best way to get the last version is to use a vim plugin manager (Vim-plug, Vundle, NeoBundle...).
+
+Add `KabbAmine/vCoolor.vim` to your plugins part in your vimrc then install it.
+
 ========================================================================
 3. |USAGE|				*vcoolor-usage*
 
@@ -84,9 +84,10 @@ Use it:
 * To insert a color anywhere.
 * To modify the current hex, rgb, rgba or hsl color.
 
-Using `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
-Using `<Alt-V>` you can insert a hsl color anywhere (NORMAL and INSERT modes).
-Using `<Alt-W>` you can insert a rgba color anywhere (NORMAL and INSERT modes).
+And using:
+* `<Alt-R>` you can insert a rgb color anywhere (NORMAL and INSERT modes).
+* `<Alt-V>` you can insert a hsl color anywhere (NORMAL and INSERT modes).
+* `<Alt-W>` you can insert a rgba color anywhere (NORMAL and INSERT modes).
 
 ========================================================================
 4. |COMMANDS|				*vcoolor-command*
@@ -177,6 +178,13 @@ Each mapping works in both `NORMAL` and `INSERT` mode.
 
 To get hex colors in lower case, you can add to your vimrc: >
 	let g:vcoolor_lowercase = 1
+>
+------------------------------------------------------------------------
+6.2. g:vcoolor_disable_mappings~
+*vcoolor-custom:disable-maps*
+
+To disable all default mappings and map only what you want: >
+    let g:vcoolor_disable_mappings = 1
 >
 ========================================================================
 7. |NOTES|
