@@ -1,5 +1,5 @@
-vCoolor - Simple color selector/picker plugin for Vim.
-======================================================
+vCoolor - Simple color selector/picker for Vim (<small>v1.2</small>)
+===========================================================================
 
 Description
 -----------
@@ -42,19 +42,20 @@ Install the distributed files into Vim runtime directory which is usually `~/.vi
 ### Using Pathogen
 If you're using pathogen, extract the files into `bundle` directory.
 
-### Using Vundle (Best way)
-Just add the following line in the Vundle part of your vimrc:
-	
-	Plugin 'KabbAmine/vCoolor.vim'
+### Using a plugin manager
 
-Then proceed to the installation of the plugin with the following command:
+And this is the recommended way, use a vim plugin manager:
 
-	:PluginInstall
+| Plugin manager                                         | In vimrc                         | Installation command |
+|--------------------------------------------------------|----------------------------------|----------------------|
+| [Vim-plug](https://github.com/junegunn/vim-plug)       | `Plug 'KabbAmine/vCoolor.vim'`      | `PlugInstall`          |
+| [Vundle](https://github.com/gmarik/Vundle.vim)         | `Plugin 'KabbAmine/vCoolor.vim'`    | `PluginInstall`        |
+| [NeoBundle](https://github.com/Shougo/neobundle.vim)   | `NeoBundle 'KabbAmine/vCoolor.vim'` | `NeoBundleInstall`     |
 
 Usage
 -----
 
-In both NORMAL and INSERT modes, only 1 shortcut is needed: `<Alt-C>` (I find it very convenient :D), but he may be not working on terminal.
+In both NORMAL and INSERT modes, only 1 shortcut is needed: `<Alt-C>` (I find it very convenient :smile:), but he may be not working on terminal.
 
 Use it:
 
@@ -107,32 +108,33 @@ Here they are with exemples to understand how they work:
 Mapping
 -------
 
-To change the mapping by default, add to your *vimrc*.
+To change the mapping by default, add to your vimrc.
 
 	let g:vcoolor_map = '<NEW_MAPPING>'
 	let g:vcool_ins_rgb_map = '<NEW_MAPPING>'		" Insert rgb color.
 	let g:vcool_ins_hsl_map = '<NEW_MAPPING>'		" Insert hsl color.
 	let g:vcool_ins_rgba_map = '<NEW_MAPPING>'		" Insert rgba color.
 
-Each mapping works in both `NORMAL` and `INSERT` mode (You can disable all of them, see Customization part for tha).
+Each mapping works in both `NORMAL` and `INSERT` mode ([You can disable all of them](#disableMaps) if you want).
 
 Customization
 -------------
 
-To disable all default mappings and map only what you want, add to your *vimrc*:
-
-	let g:vcoolor_disable_mappings = 1
-
-To get hex colors in lower case by default:
+To get hex colors in lower case by default, add to your vimrc:
 
 	let g:vcoolor_lowercase = 1
+
+To disable all default mappings and map only what you want:<a id="disableMaps"></a>
+
+	let g:vcoolor_disable_mappings = 1
 
 TODO
 ----
 
-- A better regex patterns.
-- Handle ~~rgba~~ and hsla colors.
-- Add possibility to modify 2 or more rgb colors in a line.
+- :white_medium_square: A better regex patterns.
+- :black_medium_square: Handle rgba colors.
+- :white_medium_square: Handle hsla colors.
+- :white_medium_square: Add possibility to modify 2 or more rgb colors in a line.
 
 Thanks
 -------
