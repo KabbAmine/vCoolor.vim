@@ -2,7 +2,7 @@
 " Version: 1.2.1
 
 " Creation     : 2014-07-26
-" Modification : 2015-04-12
+" Modification : 2015-06-01
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -89,6 +89,8 @@ let s:colorNames = vcoolor#convert#HtmlBaseColName()
 " }}}
 " Keep track of current working directory of script {{{1
 let s:path = expand('<sfile>:p:h')
+" Get datas related to used OS
+let s:blackHole = has('unix') ? ' 2> /dev/null' : ''
 " }}}
 
 " FUNCTIONS
@@ -186,24 +188,24 @@ endfunction
 function s:ExecPicker(hexColor) " {{{1
 	" Execute the appropriate command for the color picker and
 	" return the new hexadecimal color.
-
-	if has("win32")
-		let l:comm = s:path . "/../pickers/win32/cpicker.exe ".a:hexColor
-	elseif has("mac")
-		let l:comm = s:path . "/../pickers/osx/color-picker \"".a:hexColor."\""
+	
+	if exists('g:vcoolor_custom_picker')
+		let l:comm = g:vcoolor_custom_picker . '"' . a:hexColor . '"' . s:blackHole
 	else
-		if executable("yad")
-			let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center 2> /dev/null"
-		else
-			let l:comm = "zenity --title=\"vCoolor\" --color-selection --color=\"".a:hexColor."\" 2> /dev/null"
+		if has('win32')
+			let l:comm = s:path . '/../pickers/win32/cpicker.exe ' . a:hexColor
+		elseif has('mac')
+			let l:comm = s:path . '/../pickers/osx/color-picker ' . a:hexColor
+		elseif has('unix')
+			let l:comm = !executable('yad') ?
+						\ 'yad --title="vCoolor" --color --init-color="' . a:hexColor . '" --on-top --skip-taskbar --center ' . s:blackHole :
+						\ 'zenity --title="vCoolor" --color-selection --color="' . a:hexColor . '"' . s:blackHole
 		endif
 	endif
-
 	let s:newCol = system(l:comm)
 	if strlen(s:newCol) >= 13
 		let s:newCol = s:newCol[0:2].s:newCol[5:6].s:newCol[9:10]
 	endif
-
 	let s:newCol = g:vcoolor_lowercase == 1 ? tolower(s:newCol) : toupper(s:newCol)
 
     return s:newCol
