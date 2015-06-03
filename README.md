@@ -1,4 +1,4 @@
-vCoolor - Simple color selector/picker for Vim (<small>v1.2</small>)
+vCoolor - Simple color selector/picker for Vim (<small>v1.2.2</small>)
 ===========================================================================
 
 Description
@@ -29,6 +29,8 @@ In windows it uses [colorpicker-windows-commandline](https://github.com/jaxbot/c
 In Mac OSX it uses a [ruby script](https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker) to trigger the system color picker.
 
 ![vCoolor](.img/screen-osx.png)
+
+And if you want, you can even [use your own color picker](#customPicker).
 
 Installation
 -------------
@@ -120,21 +122,47 @@ Each mapping works in both `NORMAL` and `INSERT` mode ([You can disable all of t
 Customization
 -------------
 
+### Hex colors in lowercase
+
 To get hex colors in lower case by default, add to your vimrc:
 
 	let g:vcoolor_lowercase = 1
 
-To disable all default mappings and map only what you want:<a id="disableMaps"></a>
+### Disable default mappings<a id="disableMaps"></a>
+
+To disable all default mappings and map only what you want:
 
 	let g:vcoolor_disable_mappings = 1
+
+### Define a custom color picker<a id="customPicker"></a>
+
+Any color picker who take/return a hexcolor in standard I/O can be defined as the one used in the plugin:
+
+	let g:vcoolor_custom_picker = 'path/to/picker --option '
+
+As an example with zenity in GNU/Linux:
+
+	let g:vcoolor_custom_picker = 'zenity --title "custom" --color-selection --show-palette --color '
+
+Please note that the hex color will be added in the end of the string above, so add a space if needed.
+
+Example of configuration
+------------------------
+
+```
+let g:vcoolor_lowercase = 1
+let g:vcoolor_disable_mappings = 1
+let g:vcoolor_map = '<leader>g'
+```
 
 TODO
 ----
 
-- :white_medium_square: A better regex patterns.
-- :black_medium_square: Handle rgba colors.
-- :white_medium_square: Handle hsla colors.
-- :white_medium_square: Add possibility to modify 2 or more rgb colors in a line.
+- [ ] A better regex patterns.
+- [x] Handle rgba colors.
+- [ ] Handle hsla colors.
+- [ ] Add possibility to modify 2 or more rgb colors in a line.
+- [ ] Option to abbreviate colors.
 
 Thanks
 -------

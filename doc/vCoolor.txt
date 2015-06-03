@@ -1,6 +1,6 @@
 *vCoolor*	Simple color selector/picker plugin.
 
-    For Vim version 7.0 and above	Last change: 2015-04-05
+    For Vim version 7.0 and above	Last change: 2015-06-03
 
 	VCOOLOR - USE COLOR SELECTOR/PICKER FROM VIM~
 						from Kabbaj Amine~
@@ -28,6 +28,7 @@ License : This file is placed in the public domain.
 6. CUSTOMIZATION			|vcoolor-custom|
     6.1. g:vcoolor_lowercase		|vcoolor-custom:lowercase|
     6.2. g:vcoolor_disable_mappings	|vcoolor-custom:disable-maps|
+    6.3. g:vcoolor_custom_picker	|vcoolor-custom:custom-picker|
 7. NOTES				|vcoolor-notes|
 
 ========================================================================
@@ -48,6 +49,7 @@ What this plugin doesn't do:
 In GNU/Linux it uses a simple GTK+ dialog.
 In windows it uses colorpicker-windows-commandline (https://github.com/jaxbot/colorpicker-windows-commandline) (The binary is included in the plugin).
 In Mac OSX it uses a ruby script (https://github.com/KabbAmine/vCoolor.vim/tree/master/osx/color-picker) to trigger the system color trigger.
+And if you want, you can even use your own color picker (See 6.3).
 
 ========================================================================
 2. |INSTALLATION|
@@ -185,6 +187,16 @@ To get hex colors in lower case, you can add to your vimrc: >
 
 To disable all default mappings and map only what you want: >
     let g:vcoolor_disable_mappings = 1
+
+------------------------------------------------------------------------
+6.3. g:vcoolor_custom_picker~
+*vcoolor-custom:custom-picker*
+>
+Any color picker who take/return a hexcolor in standard I/O can be defined as the one used in the plugin: >
+	let g:vcoolor_custom_picker = 'path/to/picker --option '
+As an example with zenity in GNU/Linux: >
+	let g:vcoolor_custom_picker = 'zenity --title "custom" --color-selection --show-palette --color '
+Please note that the hex color will be added in the end of the string above, so add a space if needed.
 >
 ========================================================================
 7. |NOTES|
