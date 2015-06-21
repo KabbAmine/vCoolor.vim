@@ -1,4 +1,4 @@
-vCoolor - Simple color selector/picker for Vim (<small>v1.2.2</small>)
+vCoolor - Simple color selector/picker for Vim (<small>v1.2.3</small>)
 ===========================================================================
 
 Description
