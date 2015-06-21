@@ -201,7 +201,7 @@ function s:ExecPicker(hexColor) " {{{1
 		if has('win32')
 			let l:comm = s:path . '/../pickers/win32/cpicker.exe ' . a:hexColor . s:blackHole
 		elseif has('mac')
-			let l:comm = s:path . '/../pickers/osx/color-picker ' . a:hexColor . s:blackHole
+			let l:comm = s:path . '/../pickers/osx/color-picker "' . a:hexColor . '"'
 		elseif has('unix')
 			let l:comm = executable('yad') ?
 						\ 'yad --title="vCoolor" --color --on-top --skip-taskbar --center --init-color="' . a:hexColor . '"' . s:blackHole :
