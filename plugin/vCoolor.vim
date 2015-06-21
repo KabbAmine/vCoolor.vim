@@ -2,7 +2,7 @@
 " Version: 1.2.2
 
 " Creation     : 2014-07-26
-" Modification : 2015-06-03
+" Modification : 2015-06-21
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -95,7 +95,7 @@ if has('unix')
 elseif has('win32')
 	let s:blackHole = ' > NUL'
 else
-	let s:blackHole = ''
+	let s:blackHole = ' >& /dev/null'
 endif
 " }}}
 
@@ -201,7 +201,7 @@ function s:ExecPicker(hexColor) " {{{1
 		if has('win32')
 			let l:comm = s:path . '/../pickers/win32/cpicker.exe ' . a:hexColor . s:blackHole
 		elseif has('mac')
-			let l:comm = s:path . '/../pickers/osx/color-picker "' . a:hexColor . '"'
+			let l:comm = s:path . '/../pickers/osx/color-picker "' . a:hexColor . '"' . s:blackHole
 		elseif has('unix')
 			let l:comm = executable('yad') ?
 						\ 'yad --title="vCoolor" --color --on-top --skip-taskbar --center --init-color="' . a:hexColor . '"' . s:blackHole :
