@@ -16,7 +16,8 @@ blue = blue.to_s
 out = IO.popen [
  'osascript',
  '-e', 'property my_color : {' + red + ',' + green + ',' + blue + '}',
- '-e', 'tell application "MacVim.app"',
+ '-e', 'set theApp to ((path to frontmost application) as text)',
+ '-e', 'tell application theApp',
  '-e', '  activate',
  '-e',%|  set Applescript's text item delimiters to {"\n"}|,
  '-e', '  try',
