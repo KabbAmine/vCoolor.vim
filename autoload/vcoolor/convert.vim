@@ -1,7 +1,7 @@
 " Color conversion functions.
 
 " Creation     : 2015-04-04
-" Modification : 2015-04-04
+" Modification : 2016-02-21
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -282,8 +282,8 @@ fun! vcoolor#convert#Rgb2Hsl(rgbCol) " {{{1
 	let l:g = l:rgbColL[1] / 255.0
 	let l:b = l:rgbColL[2] / 255.0
 
-	let l:min = vsl#type#list#GetMinVal([l:r,l:g,l:b])
-	let l:max = vsl#type#list#GetMaxVal([l:r,l:g,l:b])
+	let l:min = vcoolor#misc#GetMinVal([l:r,l:g,l:b])
+	let l:max = vcoolor#misc#GetMaxVal([l:r,l:g,l:b])
 	let l:delta = l:max - l:min
 
 	let l:l = (l:max + l:min) / 2.0
