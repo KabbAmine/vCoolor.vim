@@ -2,7 +2,7 @@
 " Version: 1.2.3
 
 " Creation     : 2014-07-26
-" Modification : 2015-06-21
+" Modification : 2016-08-09
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -203,9 +203,16 @@ function s:ExecPicker(hexColor) " {{{1
 		elseif has('mac')
 			let l:comm = s:path . '/../pickers/osx/color-picker "' . a:hexColor . '"' . s:blackHole
 		elseif has('unix')
-			let l:comm = executable('yad') ?
-						\ 'yad --title="vCoolor" --color --on-top --skip-taskbar --center --init-color="' . a:hexColor . '"' . s:blackHole :
-						\ 'zenity --title="vCoolor" --color-selection --color="' . a:hexColor . '"' . s:blackHole
+			if (executable('yad'))
+				let l:comm = 'yad --title="vCoolor" --color --on-top --skip-taskbar --center --init-color="' . a:hexColor . '"' . s:blackHole
+			elseif (executable('zenity'))
+				let l:comm = 'zenity --title="vCoolor" --color-selection --color="' . a:hexColor . '"' . s:blackHole
+			else
+				echohl ErrorMsg
+				echomsg 'No yad or zenity installed'
+				echohl None
+				return
+			en
 		endif
 	endif
 	let s:newCol = system(l:comm)
