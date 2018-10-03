@@ -23,11 +23,15 @@ out = IO.popen [
  '-e', '  try',
  '-e', '    set col to (choose color default color my_color) as text',
  '-e', '  on error number -128 --',
- '-e', '    set col to my_color as text',
+ '-e', '    set col to ""',
  '-e', '  end try',
  '-e', 'end tell',
 ]
 
-print ?#, *out.read.lines.map { |color| '%02x' % (color.to_i / 256) }
+lines = out.read.lines
+
+if lines.length > 1
+  print ?#, *lines.map { |color| '%02x' % (color.to_i / 256) }
+end
 
 # Credit: http://www.reddit.com/r/vim/comments/2crzey/finallly_we_have_a_color_picker_in_vim/cjiiga2
