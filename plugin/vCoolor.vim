@@ -216,7 +216,9 @@ function s:ExecPicker(hexColor) " {{{1
 		endif
 	endif
 	let s:newCol = system(l:comm)
-	if strlen(s:newCol) >= 13
+	if tolower(s:newCol)[0:3] == 'rgb('
+		let s:newCol = vcoolor#convert#Rgb2Hex(s:newCol[4:strlen(s:newCol)-3])
+	elseif strlen(s:newCol) >= 13
 		let s:newCol = s:newCol[0:2].s:newCol[5:6].s:newCol[9:10]
 	endif
 	let s:newCol = g:vcoolor_lowercase == 1 ? tolower(s:newCol) : toupper(s:newCol)
