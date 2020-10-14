@@ -2,7 +2,7 @@
 " Version: 1.2.3
 
 " Creation     : 2014-07-26
-" Modification : 2016-08-09
+" Modification : 2020-10-14
 " Maintainer   : Kabbaj Amine <amine.kabb@gmail.com>
 " License      : This file is placed in the public domain.
 
@@ -113,7 +113,7 @@ function s:GetCurrCol() " {{{1
     " ]
 
     let l:cWord = expand("<cWORD>")
-    let l:cword = expand("<cword>")
+    let l:cword = tolower(expand("<cword>"))
     let l:getLine = getline(".")
 
     let l:regexHex = '^.*\(#[a-fA-F0-9]\{3,6}\).*$'
@@ -126,7 +126,7 @@ function s:GetCurrCol() " {{{1
     " Nothing or special character under cursor fix.
     if match(l:cWord, '[(, ]\+') == 0
         let s:currColor = ["","","n"]
-    elseif has_key(s:colorNames, tolower(l:cword))
+    elseif has_key(s:colorNames, l:cword)
         let s:currColor = [l:cword, s:colorNames[l:cword], "l"]
     elseif match(l:getLine, l:regexRgb) != -1
         let s:currColor[0] = substitute(l:getLine, l:regexRgb, '\1', '')
