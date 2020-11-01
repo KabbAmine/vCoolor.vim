@@ -37,7 +37,7 @@ let s:commandNames = [
 			\ "Rgb2Hex", "Rgb2RgbPerc", "Rgb2Hsl",
 			\ "RgbPerc2Hex", "RgbPerc2Rgb",
 			\ "Hex2Lit", "Hex2Rgb", "Hex2RgbPerc", "Hex2Hsl",
-			\ "Hsl2Rgb", "Hsl2Hex"
+			\ "Hsl2Rgb", "Hsl2Hex", "Rgb2RgbFrac"
 			\ ]
 for s:cn in s:commandNames
     if exists(":".s:cn."") != 2
@@ -269,6 +269,8 @@ function s:VCoolIns(type) " {{{1
 			execute ":normal ahsl(".vcoolor#convert#Hex2Hsl(l:newCol).")"
 		elseif a:type == 'ra'
 			execute ":normal argba(".vcoolor#convert#Hex2Rgb(l:newCol).", 1)"
+		elseif a:type == 'rf'
+			execute ":normal a".vcoolor#convert#Hex2RgbFrac(l:newCol)
 		endif
 	endif
 

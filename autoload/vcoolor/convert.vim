@@ -189,6 +189,26 @@ fun! vcoolor#convert#Rgb2RgbPerc(rgbCol) " {{{1
     return l:color
 
 endfun
+fun! vcoolor#convert#Rgb2RgbFrac(rgbCol) " {{{1
+    " Convert from rgb to rgb (fraction):
+    " 255, 0, 255 => 1.0, 0.0, 1.0
+
+    let l:rgbCol = substitute(a:rgbCol, " ", "", "g")
+    let l:rgbColL = split(l:rgbCol, ",")
+
+    let l:color = ""
+    for l:element in copy(l:rgbColL)
+        let l:rgbElem= printf('%.2f',l:element / 255.0)
+        if len(l:color) == 0
+            let l:color = l:rgbElem
+        else
+            let l:color = l:color.", ".l:rgbElem
+        endif
+    endfor
+
+    return l:color
+
+endfun
 fun! vcoolor#convert#RgbPerc2Hex(rgbPercCol) " {{{1
     " Convert from rgb (%) to hex:
     " 100%, 0%, 100% => #FF00FF
@@ -266,6 +286,16 @@ fun! vcoolor#convert#Hex2RgbPerc(hexCol) " {{{1
 
     let l:rgbCol = vcoolor#convert#Hex2Rgb(a:hexCol)
     let l:color = vcoolor#convert#Rgb2RgbPerc(l:rgbCol)
+
+    return l:color
+
+endfun
+fun! vcoolor#convert#Hex2RgbFrac(hexCol) " {{{1
+    " Convert from hex to rgb (frac):
+    " #FF00FF => 1.0, 0.0, 1.0
+
+    let l:rgbCol = vcoolor#convert#Hex2Rgb(a:hexCol)
+    let l:color = vcoolor#convert#Rgb2RgbFrac(l:rgbCol)
 
     return l:color
 
